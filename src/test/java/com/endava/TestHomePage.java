@@ -1,8 +1,10 @@
 package com.endava;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -34,8 +36,10 @@ public class TestHomePage {
 	public void testHomePageIsOpened() {
 		homePage = new HomePage(new ChromeDriver());
 		homePage.open();
+		Assert.assertEquals(homePage.driver.getCurrentUrl(), "https://www.endava.com/");
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
+
 	}
 
 	@Test
@@ -47,6 +51,7 @@ public class TestHomePage {
 		menuPage = homePage.openMenu();
 		new WebDriverWait(menuPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.navigationList));
+		Assert.assertTrue(menuPage.driver.findElement(By.id("search-input")).isDisplayed());
 	}
 
 	@AfterMethod
