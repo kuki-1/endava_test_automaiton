@@ -1,5 +1,6 @@
 package com.endava;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +25,7 @@ public class TestHomePage {
 	@BeforeTest
 	public void setUp() {
 		WebDriverManager.chromedriver().setup();
+		Logger.getLogger(this.getClass()).info(" method setUp()");
 	}
 
 	/*
@@ -36,6 +38,7 @@ public class TestHomePage {
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
+		Logger.getLogger(this.getClass()).info(" method testHomePageIsOpened()");
 	}
 
 	@Test
@@ -47,11 +50,13 @@ public class TestHomePage {
 		menuPage = homePage.openMenu();
 		new WebDriverWait(menuPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.navigationList));
+		Logger.getLogger(this.getClass()).info(" method testOpenMenu()");
 	}
 
 	@AfterMethod
 	public void tearDown() {
 		homePage.quit();
+		Logger.getLogger(this.getClass()).info(" method tearDown()");
 	}
 
 }
