@@ -35,10 +35,10 @@ public class TestHomePage {
 	public void testHomePageIsOpened() {
 		homePage = new HomePage(new ChromeDriver());
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getENDAVA_URL());
-		Assert.assertTrue(homePage.isTitleCorrect(homePage.getENDAVA_TITLE()));
+		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
+		Assert.assertTrue(homePage.isTitleCorrect(homePage.getEndavaTitle()));
 		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
+				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
 
 	}
 
@@ -47,12 +47,12 @@ public class TestHomePage {
 		homePage = new HomePage(new ChromeDriver());
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
+				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
 		homePage.scrollDown();
 		Assert.assertTrue(homePage.isSolutionMenusVisible());
 		menuPage = homePage.openMenu();
 		new WebDriverWait(menuPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.navigationList));
+				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.getNavigationList()));
 	}
 
 	@AfterMethod

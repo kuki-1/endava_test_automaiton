@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
  */
 public class HomePage extends BasePage {
 
-	private final String ENDAVA_URL = "https://www.endava.com/";
-	private final String ENDAVA_TITLE = "Endava";
-	public By contactButtons = By.id("contact-buttons");
-	public By burgerMenu = By.id("menu-toggle");
-	public By solutionMenus = By.className("proposition-section");
-	public By centerScroll = By.className("fe_downarrow");
+	private static final String ENDAVA_URL = "https://www.endava.com/";
+	private static final String ENDAVA_TITLE = "Endava";
+	private By contactButtons = By.id("contact-buttons");
+	private By burgerMenu = By.id("menu-toggle");
+	private By solutionMenus = By.className("proposition-section");
+	private By centerScroll = By.className("fe_downarrow");
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -42,12 +42,16 @@ public class HomePage extends BasePage {
 		return driver.getTitle().equalsIgnoreCase(title);
 	}
 
-	public String getENDAVA_URL() {
+	public String getEndavaURL() {
 		return ENDAVA_URL;
 	}
 
-	public String getENDAVA_TITLE() {
+	public String getEndavaTitle() {
 		return ENDAVA_TITLE;
+	}
+
+	public By getContactButtons() {
+		return contactButtons;
 	}
 
 }
