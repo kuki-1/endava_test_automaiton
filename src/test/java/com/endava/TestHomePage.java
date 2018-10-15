@@ -1,6 +1,5 @@
 package com.endava;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,7 +35,8 @@ public class TestHomePage {
 	public void testHomePageIsOpened() {
 		homePage = new HomePage(new ChromeDriver());
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl(), "https://www.endava.com/");
+		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getENDAVA_URL());
+		Assert.assertTrue(homePage.isTitleCorrect(homePage.getENDAVA_TITLE()));
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
 
@@ -48,10 +48,11 @@ public class TestHomePage {
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
+		homePage.scrollDown();
+		Assert.assertTrue(homePage.isSolutionMenusVisible());
 		menuPage = homePage.openMenu();
 		new WebDriverWait(menuPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.navigationList));
-		Assert.assertTrue(menuPage.driver.findElement(By.id("search-input")).isDisplayed());
 	}
 
 	@AfterMethod
