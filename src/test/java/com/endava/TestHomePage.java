@@ -20,12 +20,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class TestHomePage {
 
 	private HomePage homePage;
-	private MenuPage menuPage;
+	private MenuPage menuPage;	
+	private static Logger log = Logger.getLogger(TestHomePage.class);
 
 	@BeforeTest
 	public void setUp() {
 		WebDriverManager.chromedriver().setup();
-		Logger.getLogger(this.getClass()).info(" method setUp()");
+		log.info("setUp()");
 	}
 
 	/*
@@ -38,7 +39,7 @@ public class TestHomePage {
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.contactButtons));
-		Logger.getLogger(this.getClass()).info(" method testHomePageIsOpened()");
+		log.info("testHomePageIsOpened()");
 	}
 
 	@Test
@@ -50,13 +51,13 @@ public class TestHomePage {
 		menuPage = homePage.openMenu();
 		new WebDriverWait(menuPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.navigationList));
-		Logger.getLogger(this.getClass()).info(" method testOpenMenu()");
+		log.info("testOpenMenu()");
 	}
 
 	@AfterMethod
 	public void tearDown() {
 		homePage.quit();
-		Logger.getLogger(this.getClass()).info(" method tearDown()");
+		log.info("tearDown()");
 	}
 
 }

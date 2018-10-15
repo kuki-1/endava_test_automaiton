@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class BasePage {
 
 	public WebDriver driver;
+	private static Logger log = Logger.getLogger(BasePage.class);
 
 	protected BasePage(WebDriver driver) {
 		this.driver = driver;
@@ -18,7 +19,7 @@ public class BasePage {
 	public void quit() {
 		if (this != null) {
 			driver.quit();
-			Logger.getLogger(this.getClass()).debug(" method quit()");
+			log.debug("quit()");
 		}
 	}
 }
