@@ -1,19 +1,19 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.endava.util.Utils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -26,22 +26,26 @@ public class TestHomePage {
 	private BasePage basePage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
+	/**
+	 * @author Vladimir Krekic
+	 * @param browser web browser defined in testng.xml
+	 */
 	@BeforeTest
-	public void setUp() {
-		WebDriverManager.chromedriver().setup();
+	@Parameters({"browser"})
+	public void setUp(String browser) {
+		homePage = Utils.setUpWebBrowser(browser);
+		basePage = Utils.setUpWebBrowser(browser);
 		log.info("setUp()");
 	}
 
 	/**
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page, compares current URL and expected URL to see if they
-	 * match, and validates home page title
+     * match, and validates home page title
+	 * @author Vladimir Krekic
 	 */
 	@Test
 	public void testHomePageIsOpened() {
-		homePage = new HomePage(new ChromeDriver());
-		basePage = new BasePage(new ChromeDriver());
-		basePage.quit();
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
 		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
@@ -51,6 +55,7 @@ public class TestHomePage {
 	}
 
 	/**
+   * @author Vladimir Krekic
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page,validates that solution menus are visible on home page,
 	 * and validates that burger menu is opened by checking if navigation list is
@@ -58,7 +63,6 @@ public class TestHomePage {
 	 */
 	@Test
 	public void testOpenMenu() {
-		homePage = new HomePage(new ChromeDriver());
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
@@ -70,9 +74,10 @@ public class TestHomePage {
 		log.info("testOpenMenu()");
 	}
 
-	@AfterMethod
+	@AfterTest
 	public void tearDown() {
 		homePage.quit();
+		basePage.quit();
 		log.info("tearDown()");
 	}
 }

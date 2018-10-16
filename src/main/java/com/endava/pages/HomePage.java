@@ -35,8 +35,7 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * finds the down arrow element and clicks on it
-	 * 
+	 * finds the down arrow element and clicks on it	 * 
 	 * @author Goran.Kukolj
 	 */
 	public void clickOnDownArrow() {
@@ -44,8 +43,7 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * @author Goran.Kukolj
-	 * 
+	 * @author Goran.Kukolj	 * 
 	 * @return true or false depending on the visibility of solution menus
 	 */
 	public boolean isSolutionMenusVisible() {
