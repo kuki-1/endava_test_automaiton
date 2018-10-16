@@ -4,4 +4,5 @@
 .classpath
 .settings/
 test-output/
+*.log
 .idea
