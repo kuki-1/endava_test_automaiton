@@ -33,13 +33,11 @@ public class TestHomePage {
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page, compares current URL and expected URL to see if they
 	 * match, and validates home page title
-	 * 
-	 * @author Goran.Kukolj
 	 */
 	@Test
 	public void testHomePageIsOpened() {
 		homePage = new HomePage(new ChromeDriver());
-		basePage = homePage;
+		basePage = new HomePage(homePage.driver);
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
 		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
@@ -49,13 +47,10 @@ public class TestHomePage {
 	}
 
 	/**
-	 * 
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page,validates that solution menus are visible on home page,
 	 * and validates that burger menu is opened by checking if navigation list is
 	 * visible on the page
-	 * 
-	 * @author Goran.Kukolj
 	 */
 	@Test
 	public void testOpenMenu() {
