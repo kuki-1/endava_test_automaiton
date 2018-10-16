@@ -42,16 +42,14 @@
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>src\main\java\com\endava\util</directory>
 				<filtering>true</filtering>
 			</resource>
-		</resources>
-		<testResources>
-			<testResource>
+			<resource>
 				<directory>src/test/resources</directory>
 				<filtering>true</filtering>
-			</testResource>
-		</testResources>
+			</resource>
+		</resources>		
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
