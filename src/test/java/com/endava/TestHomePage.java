@@ -2,11 +2,13 @@ package com.endava;
 
 import org.apache.log4j.Logger;
 import com.endava.util.Utils;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.endava.pages.BasePage;
@@ -30,7 +32,7 @@ public class TestHomePage {
 	 * @param browser web browser defined in testng.xml
 	 */
 	@BeforeTest
-	@Parameters ({"browser"})
+	@Parameters({"browser"})
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
 		log.info("setUp()");
@@ -39,7 +41,7 @@ public class TestHomePage {
 	/**
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page, compares current URL and expected URL to see if they
-   * match, and validates home page title
+     * match, and validates home page title
 	 * @author Vladimir Krekic
 	 */
 	@Test
