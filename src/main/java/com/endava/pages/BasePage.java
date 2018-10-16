@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class BasePage {
 
 	public WebDriver driver;
+	private static Logger log = Logger.getLogger(BasePage.class);
 
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
@@ -28,6 +30,7 @@ public class BasePage {
 	public void quit() {
 		if (this != null) {
 			driver.quit();
+			log.debug("quit()");
 		}
 	}
 }

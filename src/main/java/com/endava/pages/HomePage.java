@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,6 +16,7 @@ public class HomePage extends BasePage {
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
+  private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -23,10 +25,12 @@ public class HomePage extends BasePage {
 	public void open() {
 		driver.get(ENDAVA_URL);
 		driver.manage().window().maximize();
+		log.debug("open()");
 	}
 
 	public MenuPage openMenu() {
 		driver.findElement(this.burgerMenu).click();
+		log.debug("openMenu()");
 		return new MenuPage(driver);
 	}
 
@@ -71,5 +75,4 @@ public class HomePage extends BasePage {
 	public By getContactButtons() {
 		return contactButtons;
 	}
-
 }

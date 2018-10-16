@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class MenuPage extends BasePage {
 
 	private By navigationList = By.className("navigation");
+	private static Logger log = Logger.getLogger(MenuPage.class);
 
 	public MenuPage(WebDriver driver) {
 		super(driver);
@@ -18,5 +20,4 @@ public class MenuPage extends BasePage {
 	public By getNavigationList() {
 		return navigationList;
 	}
-
 }
