@@ -30,26 +30,44 @@ public class HomePage extends BasePage {
 		return new MenuPage(driver);
 	}
 
-	public void scrollDown() {
+	/**
+	 * finds the down arrow element and clicks on it
+	 * 
+	 * @author Goran.Kukolj
+	 */
+	public void clickOnDownArrow() {
 		driver.findElement(this.centerScroll).click();
 	}
 
+	/**
+	 * @author Goran.Kukolj
+	 * 
+	 * @return true or false depending on the visibility of solution menus
+	 */
 	public boolean isSolutionMenusVisible() {
 		return driver.findElement(solutionMenus).isDisplayed();
 	}
 
-	public boolean isTitleCorrect(String title) {
-		return driver.getTitle().equalsIgnoreCase(title);
-	}
-
+	/**
+	 * @author Goran.Kukolj
+	 * @return String endava URL
+	 */
 	public String getEndavaURL() {
 		return ENDAVA_URL;
 	}
 
+	/**
+	 * @author Goran.Kukolj
+	 * @return String endava title
+	 */
 	public String getEndavaTitle() {
 		return ENDAVA_TITLE;
 	}
 
+	/**
+	 * @author Goran.Kukolj
+	 * @return contact button element
+	 */
 	public By getContactButtons() {
 		return contactButtons;
 	}
