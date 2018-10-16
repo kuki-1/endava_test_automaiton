@@ -10,10 +10,14 @@ import org.openqa.selenium.WebDriver;
  */
 public class MenuPage extends BasePage {
 
-	public By navigationList = By.className("navigation");
+	private By navigationList = By.className("navigation");
 	private static Logger log = Logger.getLogger(MenuPage.class);
 
 	public MenuPage(WebDriver driver) {
 		super(driver);
+	}
+
+	public By getNavigationList() {
+		return navigationList;
 	}
 }
