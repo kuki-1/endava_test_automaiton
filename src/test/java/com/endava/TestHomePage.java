@@ -2,7 +2,6 @@ package com.endava;
 
 import org.apache.log4j.Logger;
 import com.endava.util.Utils;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -35,6 +34,7 @@ public class TestHomePage {
 	@Parameters({"browser"})
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
+		basePage = Utils.setUpWebBrowser(browser);
 		log.info("setUp()");
 	}
 
@@ -46,9 +46,6 @@ public class TestHomePage {
 	 */
 	@Test
 	public void testHomePageIsOpened() {
-		homePage = new HomePage(new ChromeDriver());
-		basePage = new BasePage(new ChromeDriver());
-		basePage.quit();
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
 		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
@@ -80,6 +77,7 @@ public class TestHomePage {
 	@AfterTest
 	public void tearDown() {
 		homePage.quit();
+		basePage.quit();
 		log.info("tearDown()");
 	}
 }
