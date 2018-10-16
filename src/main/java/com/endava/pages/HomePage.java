@@ -33,5 +33,4 @@ public class HomePage extends BasePage {
 		log.debug("openMenu()");
 		return new MenuPage(driver);
 	}
-
 }
