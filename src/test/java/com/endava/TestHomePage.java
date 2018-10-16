@@ -37,12 +37,14 @@ public class TestHomePage {
 	@Test
 	public void testHomePageIsOpened() {
 		homePage = new HomePage(new ChromeDriver());
-		basePage = new HomePage(homePage.driver);
+		basePage = new BasePage(new ChromeDriver());
+		basePage.quit();
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
 		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
+
 
 	}
 
