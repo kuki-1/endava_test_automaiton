@@ -3,6 +3,7 @@ package com.endava.util;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -22,7 +23,7 @@ public class Utils {
         HomePage homePage;
         if(browser.equalsIgnoreCase("chrome")){
             WebDriverManager.chromedriver().setup();
-            homePage = new HomePage(new ChromeDriver());
+            homePage = new HomePage(new ChromeDriver(disableInfobarsOption()));
         }else if(browser.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
             homePage = new HomePage(new FirefoxDriver());
@@ -32,5 +33,17 @@ public class Utils {
         }else throw new RuntimeException();
 
         return homePage;
+    }
+    
+    /**
+     * Returns option that disables infobars in chrome browser
+     *
+     * @author jelena.v.corak@gmail.com
+     * @return ChromeOptions
+     */
+    public static ChromeOptions disableInfobarsOption() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-infobars");
+        return options;
     }
 }
