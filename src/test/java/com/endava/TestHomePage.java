@@ -61,7 +61,7 @@ public class TestHomePage {
 	 * and validates that burger menu is opened by checking if navigation list is
 	 * visible on the page
 	 */
-	@Test
+	@Test (dependsOnMethods = {"testHomePageIsOpened"})
 	public void testOpenMenu() {
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
