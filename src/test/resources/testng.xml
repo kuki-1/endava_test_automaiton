@@ -4,6 +4,7 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.endava.TestHomePage" />
+            <class name="com.endava.TestAutomationPage" />
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

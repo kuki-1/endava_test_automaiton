@@ -1,10 +1,8 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -22,7 +20,6 @@ public class TestHomePage {
 
 	private HomePage homePage;
 	private MenuPage menuPage;
-	private BasePage basePage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
 	/**
@@ -33,8 +30,7 @@ public class TestHomePage {
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
-		basePage = Utils.setUpWebBrowser(browser);
-		log.info("setUp()");
+		log.info("Sets up web browser");
 	}
 
 	/**
@@ -44,39 +40,38 @@ public class TestHomePage {
 	 * 
 	 * @author Vladimir Krekic
 	 */
-	@Test(priority = 1)
+	@Test
 	public void testHomePageIsOpened() {
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
-		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
-		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
-		log.info("testHomePageIsOpened()");
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()));
+		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
+		log.info("Tests if home page is opened");
 	}
 
 	/**
-	 * @author Vladimir Krekic Test validates that home page is opened by checking
-	 *         if contact buttons are visible on the page,validates that solution
-	 *         menus are visible on home page, and validates that burger menu is
-	 *         opened by checking if navigation list is visible on the page
+	 * Test validates that home page is opened by checking if contact buttons are
+	 * visible on the page,validates that solution menus are visible on home page,
+	 * and validates that burger menu is opened by checking if navigation list is
+	 * visible on the page
+	 * 
+	 * @author Vladimir Krekic
 	 */
-	@Test(priority = 2)
+	@Test
 	public void testOpenMenu() {
 		homePage.open();
-		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		homePage.clickOnDownArrow();
 		Assert.assertTrue(homePage.isSolutionMenusVisible());
 		menuPage = homePage.openMenu();
-		new WebDriverWait(menuPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.getNavigationList()));
-		log.info("testOpenMenu()");
+		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
+		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()));
+		log.info("Tests if home page is opened,and opens burger menu");
 	}
 
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		homePage.quit();
-		basePage.quit();
-		log.info("tearDown()");
+		log.info("Closes the browsers");
 	}
 }
