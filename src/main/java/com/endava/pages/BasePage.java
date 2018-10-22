@@ -24,13 +24,25 @@ public class BasePage {
 	 *         title
 	 */
 	public static boolean isTitleCorrect(WebDriver driver, String title) {
+		log.debug("Checks if the title is correct");
 		return driver.getTitle().equalsIgnoreCase(title);
 	}
 
+	/**
+	 * @author Goran.Kukolj
+	 * @param driver
+	 * @param title
+	 * @return true or false depending on equality of URL
+	 */
+	public static boolean isURLTheSame(WebDriver driver, String title) {
+		log.debug("Checks if the URL has changed");
+		return driver.getCurrentUrl().equalsIgnoreCase(title);
+	}
+
 	public void quit() {
-		if (this != null) {
+		if (this.driver != null) {
 			driver.quit();
-			log.debug("quit()");
+			log.debug("Browser closed");
 		}
 	}
 }

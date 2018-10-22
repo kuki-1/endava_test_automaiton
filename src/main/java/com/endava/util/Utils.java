@@ -1,9 +1,13 @@
 package com.endava.util;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
@@ -14,7 +18,6 @@ import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 /**
  * @author Vladimir Krekic
@@ -42,6 +45,14 @@ public class Utils {
 		}else throw new RuntimeException();
 		log.debug("setUpWebBrowser(browser) - returns HomePage with chosen browser driver");
 		return homePage;
+	}
+
+	/**
+	 * @param driver
+	 * @param locator
+	 */
+	public static void webDriverWait(WebDriver driver, By locator) {
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 	/**

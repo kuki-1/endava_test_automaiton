@@ -3,7 +3,7 @@ package com.endava;
 import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -31,9 +31,9 @@ public class TestHomePage {
 	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL(), "Incorrect HomePage Url");
+    Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Incorrect HomePage Url");
 		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()), "Incorrect HomePage Title ");
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		log.info("testHomePageIsOpened()");
 	}
 
@@ -42,13 +42,14 @@ public class TestHomePage {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		homePage.clickOnDownArrow();
-		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menu not visible");
+		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menus are not visible.");
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		log.info("testOpenMenu()");
+		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
+    log.info("testOpenMenu()");
 	}
 
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		homePage.quit();
 		log.info("tearDown()");
