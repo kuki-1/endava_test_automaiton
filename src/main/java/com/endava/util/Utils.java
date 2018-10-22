@@ -60,4 +60,5 @@ public class Utils {
 		options.addArguments("disable-infobars");
 		return options;
 	}
+	
 }

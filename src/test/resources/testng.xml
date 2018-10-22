@@ -5,6 +5,7 @@
 		<classes>
 			<class name="com.endava.TestHomePage" />
 			<class name="com.endava.TestAutomationPage" />
+			<class name="com.endava.TestMenuPage" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
