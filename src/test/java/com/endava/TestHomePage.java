@@ -44,9 +44,9 @@ public class TestHomePage {
 	public void testHomePageIsOpened() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()));
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
-		log.info("Tests if home page is opened");
+		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Url is not the same.");
+		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()),
+				"Title is not the same.");
 	}
 
 	/**
@@ -62,16 +62,14 @@ public class TestHomePage {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		homePage.clickOnDownArrow();
-		Assert.assertTrue(homePage.isSolutionMenusVisible());
+		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menus are not visible.");
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()));
-		log.info("Tests if home page is opened,and opens burger menu");
+		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
 	}
 
 	@AfterClass
 	public void tearDown() {
 		homePage.quit();
-		log.info("Closes the browsers");
 	}
 }

@@ -42,7 +42,7 @@ public class BasePage {
 	public void quit() {
 		if (this.driver != null) {
 			driver.quit();
-			log.debug("Checks if the browser is opened and sends command to close it");
+			log.debug("Browser closed");
 		}
 	}
 }

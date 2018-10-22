@@ -46,14 +46,15 @@ public class TestAutomationPage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		automationPage = menuPage.openAutomationPage();
 		Utils.webDriverWait(automationPage.driver, automationPage.getAutomationPageLink());
-		Assert.assertTrue(automationPage.isAutomationPageLinkActive());
-		Assert.assertFalse(BasePage.isURLTheSame(automationPage.driver, homePage.getEndavaURL()));
-		log.info("Tests if automation link is active");
+		Assert.assertTrue(BasePage.isTitleCorrect(automationPage.driver, automationPage.getEndavaAutomationTitle()),
+				"Title is not the same.");
+		Assert.assertTrue(automationPage.isAutomationPageLinkActive(), "Link is not active.");
+		Assert.assertTrue(BasePage.isURLTheSame(automationPage.driver, automationPage.getEndavaAutomationUrl()),
+				"URL is not the same.");
 	}
 
 	@AfterMethod
 	public void tearDown() {
 		homePage.quit();
-		log.info("Calling the method to close the browser after all tests");
 	}
 }

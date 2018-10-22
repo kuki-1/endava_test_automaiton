@@ -25,7 +25,7 @@ public class HomePage extends BasePage {
 	public void open() {
 		driver.get(ENDAVA_URL);
 		driver.manage().window().maximize();
-		log.debug("Opens www.endava.com");
+		log.debug("Opens " + getEndavaURL());
 	}
 
 	public MenuPage openMenu() {
@@ -35,7 +35,7 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * finds the down arrow element and clicks on it *
+	 * finds the down arrow element and clicks on it
 	 * 
 	 * @author Goran.Kukolj
 	 */
@@ -45,7 +45,7 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * @author Goran.Kukolj *
+	 * @author Goran.Kukolj
 	 * @return true or false depending on the visibility of solution menus
 	 */
 	public boolean isSolutionMenusVisible() {
