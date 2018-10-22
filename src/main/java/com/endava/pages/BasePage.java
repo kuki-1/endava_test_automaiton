@@ -23,7 +23,7 @@ public class BasePage {
 	 * @return true or false depending on equality of actual title and expected
 	 *         title
 	 */
-	public boolean isTitleCorrect(WebDriver driver, String title) {
+	public static boolean isTitleCorrect(WebDriver driver, String title) {
 		return driver.getTitle().equalsIgnoreCase(title);
 	}
 

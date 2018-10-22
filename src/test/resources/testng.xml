@@ -3,7 +3,8 @@
     <test thread-count="5" name="TestHomePage">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="com.endava.TestHomePage" />
+            <class name="com.endava.TestHomePage"/>
+            <class name="com.endava.TestAgilePage"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

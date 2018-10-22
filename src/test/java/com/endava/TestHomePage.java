@@ -1,5 +1,6 @@
 package com.endava;
 
+import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,8 +9,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -22,7 +21,6 @@ public class TestHomePage {
 
 	private HomePage homePage;
 	private MenuPage menuPage;
-	private BasePage basePage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
 	/**
@@ -33,7 +31,6 @@ public class TestHomePage {
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
-		basePage = Utils.setUpWebBrowser(browser);
 		log.info("setUp()");
 	}
 
@@ -48,7 +45,7 @@ public class TestHomePage {
 	public void testHomePageIsOpened() {
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
-		Assert.assertTrue(basePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
+		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
 		new WebDriverWait(homePage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
 		log.info("testHomePageIsOpened()");
@@ -76,7 +73,6 @@ public class TestHomePage {
 	@AfterTest
 	public void tearDown() {
 		homePage.quit();
-		basePage.quit();
 		log.info("tearDown()");
 	}
 }

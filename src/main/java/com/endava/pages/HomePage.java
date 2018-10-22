@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class HomePage extends BasePage {
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
+	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -32,6 +34,22 @@ public class HomePage extends BasePage {
 		driver.findElement(this.burgerMenu).click();
 		log.debug("openMenu()");
 		return new MenuPage(driver);
+	}
+
+	/**
+	 * Opens AgilePage and instantiate AgilePage object
+	 * if Agile item is present on "burger" menu
+	 * @author Vladimir Krekic
+	 * @return AgilePage
+	 */
+	public AgilePage openAgilePage() {
+		if(Utils.selectElement(driver.findElement(this.agileItem))){
+			log.debug("AgilePage opened and instantiated");
+			return new AgilePage(driver);
+		}else {
+			log.debug("Agile item on \"burger\" menu is not present");
+			return null;
+		}
 	}
 
 	/**
