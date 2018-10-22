@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
-  private static Logger log = Logger.getLogger(HomePage.class);
+	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -25,28 +25,31 @@ public class HomePage extends BasePage {
 	public void open() {
 		driver.get(ENDAVA_URL);
 		driver.manage().window().maximize();
-		log.debug("open()");
+		log.debug("Opens " + getEndavaURL());
 	}
 
 	public MenuPage openMenu() {
 		driver.findElement(this.burgerMenu).click();
-		log.debug("openMenu()");
+		log.debug("Finds burger menu and clicks on it");
 		return new MenuPage(driver);
 	}
 
 	/**
-	 * finds the down arrow element and clicks on it	 * 
+	 * finds the down arrow element and clicks on it
+	 * 
 	 * @author Goran.Kukolj
 	 */
 	public void clickOnDownArrow() {
 		driver.findElement(this.centerScroll).click();
+		log.debug("Finds the down arrow element and clicks on it");
 	}
 
 	/**
-	 * @author Goran.Kukolj	 * 
+	 * @author Goran.Kukolj
 	 * @return true or false depending on the visibility of solution menus
 	 */
 	public boolean isSolutionMenusVisible() {
+		log.debug("Checks if solution menus are visible");
 		return driver.findElement(solutionMenus).isDisplayed();
 	}
 

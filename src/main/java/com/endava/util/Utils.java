@@ -1,9 +1,13 @@
 package com.endava.util;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.endava.pages.HomePage;
 
@@ -17,8 +21,7 @@ public class Utils {
 
 	/**
 	 * @author Vladimir Krekic
-	 * @param browser
-	 *            String that represents chosen browser from testng.xml file
+	 * @param browser String that represents chosen browser from testng.xml file
 	 * @return HomePage
 	 */
 	public static HomePage setUpWebBrowser(String browser) {
@@ -36,6 +39,14 @@ public class Utils {
 			throw new RuntimeException();
 
 		return homePage;
+	}
+
+	/**
+	 * @param driver
+	 * @param locator
+	 */
+	public static void webDriverWait(WebDriver driver, By locator) {
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 	/**
