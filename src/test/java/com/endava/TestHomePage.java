@@ -1,7 +1,6 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import com.endava.util.Utils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
 import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
-
+import com.endava.util.Utils;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -31,7 +30,7 @@ public class TestHomePage {
 	 * @param browser web browser defined in testng.xml
 	 */
 	@BeforeTest
-	@Parameters({"browser"})
+	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
 		basePage = Utils.setUpWebBrowser(browser);
@@ -41,10 +40,11 @@ public class TestHomePage {
 	/**
 	 * Test validates that home page is opened by checking if contact buttons are
 	 * visible on the page, compares current URL and expected URL to see if they
-     * match, and validates home page title
+	 * match, and validates home page title
+	 * 
 	 * @author Vladimir Krekic
 	 */
-	@Test
+	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
 		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
@@ -55,13 +55,12 @@ public class TestHomePage {
 	}
 
 	/**
-   * @author Vladimir Krekic
-	 * Test validates that home page is opened by checking if contact buttons are
-	 * visible on the page,validates that solution menus are visible on home page,
-	 * and validates that burger menu is opened by checking if navigation list is
-	 * visible on the page
+	 * @author Vladimir Krekic Test validates that home page is opened by checking
+	 *         if contact buttons are visible on the page,validates that solution
+	 *         menus are visible on home page, and validates that burger menu is
+	 *         opened by checking if navigation list is visible on the page
 	 */
-	@Test
+	@Test(priority = 2)
 	public void testOpenMenu() {
 		homePage.open();
 		new WebDriverWait(homePage.driver, 5)
