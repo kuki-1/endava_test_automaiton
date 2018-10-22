@@ -2,8 +2,6 @@ package com.endava;
 
 import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -23,10 +21,6 @@ public class TestHomePage {
 	private MenuPage menuPage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
-	/**
-	 * @author Vladimir Krekic
-	 * @param browser web browser defined in testng.xml
-	 */
 	@BeforeTest
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
@@ -34,39 +28,23 @@ public class TestHomePage {
 		log.info("setUp()");
 	}
 
-	/**
-	 * Test validates that home page is opened by checking if contact buttons are
-	 * visible on the page, compares current URL and expected URL to see if they
-	 * match, and validates home page title
-	 * 
-	 * @author Vladimir Krekic
-	 */
 	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL());
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()));
-		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
+		Assert.assertEquals(homePage.driver.getCurrentUrl(), homePage.getEndavaURL(), "Incorrect HomePage Url");
+		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()), "Incorrect HomePage Title ");
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		log.info("testHomePageIsOpened()");
 	}
 
-	/**
-	 * @author Vladimir Krekic Test validates that home page is opened by checking
-	 *         if contact buttons are visible on the page,validates that solution
-	 *         menus are visible on home page, and validates that burger menu is
-	 *         opened by checking if navigation list is visible on the page
-	 */
 	@Test(priority = 2)
 	public void testOpenMenu() {
 		homePage.open();
-		new WebDriverWait(homePage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(homePage.getContactButtons()));
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		homePage.clickOnDownArrow();
-		Assert.assertTrue(homePage.isSolutionMenusVisible());
+		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menu not visible");
 		menuPage = homePage.openMenu();
-		new WebDriverWait(menuPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(menuPage.getNavigationList()));
+		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		log.info("testOpenMenu()");
 	}
 

@@ -60,7 +60,7 @@ public class Utils {
 		return new WebDriverWait(driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
-	
+
 	/**
 	 * @author Vladimir Krekic
 	 * Method is selecting (clicking on) WebElement

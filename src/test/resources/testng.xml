@@ -4,6 +4,11 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.endava.TestHomePage"/>
+        </classes>
+    </test> <!-- Test -->
+    <test thread-count="5" name="AgilePage">
+        <parameter name="browser" value="chrome"/>
+        <classes>
             <class name="com.endava.TestAgilePage"/>
         </classes>
     </test> <!-- Test -->
