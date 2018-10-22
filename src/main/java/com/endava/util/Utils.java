@@ -60,21 +60,7 @@ public class Utils {
 		return new WebDriverWait(driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * @param driver Web driver
-	 * @param locator By
-	 * @param attribute String
-	 * @param value String  - expected value of attribute in web page
-	 * @return boolean
-	 */
-	public static boolean  webDriverWait(WebDriver driver, By locator, String attribute, String value){
-		log.debug("webDriverWait(driver,locator,attribute,value) - Checking for value of web page attribute");
-		return new WebDriverWait(driver, 5)
-				.until((ExpectedConditions.attributeContains(locator, attribute, value)));
-	}
-
+	
 	/**
 	 * @author Vladimir Krekic
 	 * Method is selecting (clicking on) WebElement
