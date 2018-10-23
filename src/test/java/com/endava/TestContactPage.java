@@ -1,6 +1,6 @@
 package com.endava;
 
-import com.endava.pages.ContactsPage;
+import com.endava.pages.ContactPage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -17,10 +17,10 @@ import org.testng.annotations.Test;
 
 class TestContactPage {
 
-    private static Logger log = Logger.getLogger(ContactsPage.class);
+    private static Logger log = Logger.getLogger(ContactPage.class);
     private HomePage homePage;
     private MenuPage menuPage;
-    private ContactsPage contactsPage;
+    private ContactPage contactsPage;
 
     @BeforeTest
     @Parameters({"browser"})
@@ -43,7 +43,8 @@ class TestContactPage {
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         contactsPage = homePage.openContactsPage();
-        Assert.assertEquals(contactsPage.getContactPageUrl(), contactsPage.driver.getCurrentUrl(), "CuntactPage Url does not mach");
+        Assert.assertEquals(contactsPage.getContactPageUrl(), contactsPage.driver.getCurrentUrl(), "ContactPage Url does not mach");
+        Assert.assertTrue(ContactPage.isTitleCorrect(contactsPage.driver, contactsPage.getContactPageTitle()), "ContactPage Title does not mach");
         Assert.assertFalse(contactsPage.driver.findElement(contactsPage.getServicesRadioButton()).isSelected(),
                 "Element \"ServiceRadioButton\" selected");
         Assert.assertFalse(contactsPage.driver.findElement(contactsPage.getJoinRadioButton()).isSelected(),

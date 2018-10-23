@@ -102,10 +102,10 @@ public class HomePage extends BasePage {
 	 * @author Vladimir Krekic
 	 * @return ContactPage
 	 */
-	public ContactsPage openContactsPage(){
+	public ContactPage openContactsPage(){
 		if(Utils.selectElement(driver.findElement(this.contact))){
-			log.debug("ContactsPage opened and instantiated");
-			return new ContactsPage(driver);
+			log.debug("ContactPage opened and instantiated");
+			return new ContactPage(driver);
 		}else {
 			log.debug("Contacts item on \"burger\" menu is not present");
 			return null;
