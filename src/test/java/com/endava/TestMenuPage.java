@@ -51,9 +51,7 @@ public class TestMenuPage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		menuPage.clickOnInvestors();
 		Assert.assertEquals(menuPage.driver.getCurrentUrl(), "https://investors.endava.com/home/default.aspx",
-				"Incorrect URL for the INVESTORS page!");
-		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), "Investors".toLowerCase(),
-				"Incorrect title for Investors page!");
+				"Incorrect URL for the INVESTORS page!");		
 		Utils.webDriverWait(menuPage.driver, menuPage.getInvestorsAboutUs());
 		Assert.assertTrue(menuPage.getTextFromElement(menuPage.getInvestorsAboutUs()).contains("ABOUT US"),
 				"Text \"ABOUT US\" not found!");
