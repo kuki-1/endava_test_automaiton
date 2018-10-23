@@ -18,6 +18,7 @@ public class HomePage extends BasePage {
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
+    private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -94,4 +95,20 @@ public class HomePage extends BasePage {
 	public By getContactButtons() {
 		return contactButtons;
 	}
+
+    /**
+     * Opens InvestorsPage and instantiate InvestorsPage object
+     * if "Investors" item is present on "burger" menu
+     * @author Vladimir Krekic
+     * @return InvestorsPage
+     */
+    public InvestorsPage openInvestorsPage(){
+        if(Utils.selectElement(driver.findElement(this.investors))){
+            log.debug("InvestorsPage opened and instantiated");
+            return new InvestorsPage(driver);
+        }else {
+            log.debug("Investors item on \"burger\" menu is not present");
+            return null;
+        }
+    }
 }

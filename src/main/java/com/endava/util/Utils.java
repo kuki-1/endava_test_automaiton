@@ -11,13 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Vladimir Krekic
@@ -94,4 +90,13 @@ public class Utils {
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
 	}
+
+    /**
+     * @author Vladimir Krekic
+     * @return search result text
+     */
+    public static String getSearchResult(WebElement element){
+        log.debug("getSearchResult()");
+        return element.getText();
+    }
 }

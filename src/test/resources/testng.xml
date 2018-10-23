@@ -17,11 +17,17 @@
         <classes>
             <class name="com.endava.TestAgilePage"/>
         </classes>
-   </test> <!-- Test -->
+  </test> <!-- Test -->
   <test thread-count="5" name="TestAutomationPage">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.endava.TestAutomationPage"/>
         </classes>
    </test> <!-- Test -->
+    <test thread-count="5" name="TestInvestorsPage">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.endava.TestInvestorsPage"/>
+        </classes>
+    </test> <!-- Test -->
 </suite> <!-- Suite -->
