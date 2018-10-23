@@ -52,7 +52,8 @@ public class Utils {
 	 * @param locator
 	 */
 	public static void webDriverWait(WebDriver driver, By locator) {
-		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
+		new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 	/**
@@ -65,11 +66,6 @@ public class Utils {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("disable-infobars");
 		return options;
-	}
-
-	public static WebElement  webDriverWait(WebDriver driver, By locator){
-		return new WebDriverWait(driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 	/**
