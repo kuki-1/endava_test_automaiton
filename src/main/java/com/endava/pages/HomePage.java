@@ -18,6 +18,7 @@ public class HomePage extends BasePage {
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
+	private By lenguage = By.xpath("//*[@id=\"selected-lang\"]");
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -93,5 +94,24 @@ public class HomePage extends BasePage {
 	 */
 	public By getContactButtons() {
 		return contactButtons;
+	}
+
+	public By getLenguage() {
+		return lenguage;
+	}
+
+	/**
+	 * Opens LanguageBarPage and instantiate LanguageBarPage object
+	 * @author Vladimir Krekic
+	 * @return LanguageBarPage
+	 */
+	public LanguageBarPage openLanguageBarPage() {
+		if(Utils.selectElement(driver.findElement(this.lenguage))){
+			log.debug("LanguageBarPage opened and instantiated");
+			return new LanguageBarPage(driver);
+		}else {
+			log.debug("Language bar is not present");
+			return null;
+		}
 	}
 }
