@@ -45,7 +45,7 @@ class TestAboutPage {
         aboutPage = homePage.openAboutPage();
         Assert.assertNotEquals(homePage.getEndavaURL(), homePage.driver.getCurrentUrl(), "Url did not changed");
         Assert.assertEquals(aboutPage.driver.getCurrentUrl(), aboutPage.getAboutUrl(), "Incorrect AboutPage Url");
-        Assert.assertTrue(AgilePage.isTitleCorrect(aboutPage.driver, aboutPage.getAboutTitle()), "Incorrect AboutPage Title ");
+        Assert.assertTrue(AboutPage.isTitleCorrect(aboutPage.driver, aboutPage.getAboutTitle()), "Incorrect AboutPage Title ");
         Assert.assertTrue(aboutPage.checkAddresses(aboutPage.getAllLocations()), "Locations do not mach");
         log.info("testAllLocations() - Test passed");
     }
