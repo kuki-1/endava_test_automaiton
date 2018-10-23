@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 public class AboutPage extends BasePage {
 
+    private static final String ABOUT_URL = "https://www.endava.com/en/About";
+    private static final String ABOUT_TITLE = "About";
     private static Logger log = Logger.getLogger(AboutPage.class);
     private WebElement rightArrow = driver.findElement(By.xpath("//*[@id=\"all-locations\"]/div[2]/div[2]/div[2]"));
     private By cities = By.xpath("//*[@id=\"all-locations\"]/div[1]/div/div[*]/div/h3");
@@ -25,7 +27,7 @@ public class AboutPage extends BasePage {
     private List<WebElement> listOfCities = driver.findElements(cities);
     private List<WebElement> listOfAddresses = driver.findElements(addresses);
     private Set<String> allLocations = setAllLocations();
-    public static final List<String> ADRESE = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
+    private static final List<String> ADRESE = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
             "BOGOTÁ", "Calle 96 No. 10-38, Edificio BOX, 7th & 8th Floor, Bogota D.C.", "ATLANTA", "One Glenlake Pkwy, Suite 784",
             "AMSTERDAM", "Laapersveld 43, Hilversum", "CARACAS", "Av. Francisco de MirandaTorre HP, Piso 18. Municipio Chacao",
             "BUCHAREST", "4G Vasile Milea Blvd., 9th floor, AFI 3 Business Park", "BUENOS AIRES", "San Martin 439",
@@ -89,6 +91,14 @@ public class AboutPage extends BasePage {
 
     public Set<String> getAllLocations() {
         return allLocations;
+    }
+
+    public String getAboutUrl() {
+        return ABOUT_URL;
+    }
+
+    public String getAboutTitle() {
+        return ABOUT_TITLE;
     }
 }
 
