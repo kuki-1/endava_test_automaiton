@@ -1,9 +1,13 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.endava.util.Utils;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -13,12 +17,18 @@ public class HomePage extends BasePage {
 
 	private static final String ENDAVA_URL = "https://www.endava.com/";
 	private static final String ENDAVA_TITLE = "Endava";
+	private static final String SHARE_MENU_TEXT = "Share";
 	private By contactButtons = By.id("contact-buttons");
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
-  private static Logger log = Logger.getLogger(HomePage.class);
+	private By shareIcon = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/a");
+	private By shareMenu = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/div/p");
+	private By shareMenuOptions = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/div/ul/li[*]/a");
+	private String[] shareMenuElementsAttributes = { "share_link fe_linkedin", "share_link fe_facebook",
+			"share_link fe_twitter", "fe_mailFilled" };
+	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -37,16 +47,17 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * Opens AgilePage and instantiate AgilePage object
-	 * if Agile item is present on "burger" menu
+	 * Opens AgilePage and instantiate AgilePage object if Agile item is present on
+	 * "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return AgilePage
 	 */
 	public AgilePage openAgilePage() {
-		if(Utils.selectElement(driver.findElement(this.agileItem))){
+		if (Utils.selectElement(driver.findElement(this.agileItem))) {
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
-		}else {
+		} else {
 			log.debug("Agile item on \"burger\" menu is not present");
 			return null;
 		}
@@ -72,6 +83,38 @@ public class HomePage extends BasePage {
 	}
 
 	/**
+	 * Finds the share icon element and clicks on it
+	 * 
+	 * @author Goran.Kukolj
+	 */
+	public void clickOnShareIcon() {
+		driver.findElement(this.shareIcon).click();
+		log.debug("Finds the share icon element and clicks on it");
+	}
+
+	/**
+	 * @author Goran.Kukolj
+	 * @return true or false depending on if all 4 share options are present in the
+	 *         share menu
+	 */
+	public boolean areShareOptionsPresent() {
+		List<WebElement> shareMenuElements = driver.findElements(this.shareMenuOptions);
+		boolean result = false;
+		if (shareMenuElements.size() != shareMenuElementsAttributes.length) {
+			log.debug("Share options are not present");
+			return result;
+		}
+		for (int count = 0; count < shareMenuElementsAttributes.length; count++) {
+			String shareOptionsClassAttributes = shareMenuElements.get(count).getAttribute("class");
+			if (shareOptionsClassAttributes.equals(shareMenuElementsAttributes[count])) {
+				result = true;
+			} else
+				result = false;
+		}
+		return result;
+	}
+
+	/**
 	 * @author Goran.Kukolj
 	 * @return String endava URL
 	 */
@@ -93,5 +136,13 @@ public class HomePage extends BasePage {
 	 */
 	public By getContactButtons() {
 		return contactButtons;
+	}
+
+	public By getShareMenu() {
+		return shareMenu;
+	}
+
+	public String getShareMenuText() {
+		return SHARE_MENU_TEXT;
 	}
 }
