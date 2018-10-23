@@ -132,28 +132,38 @@ public class Utils {
 	}
 	
 	/**
-	 * Verifies page URL correctness.
+	 * Verifies page URL.
 	 * 
 	 * @author jelena.corak
 	 * 
-	 * @param WebDriver
-	 *            driver
-	 * @param String
-	 *            expected URL *
+	 * @param WebDriver driver
+	 * @param String expected URL 
 	 */
 	public static void assertUrl(WebDriver driver, String expectedUrl) {
 		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
 	}
-
+	
 	/**
-	 * Verifies page title correctness.
+	 * Asserts that the link in the element is correct.
 	 * 
 	 * @author jelena.corak
 	 * 
-	 * @param WebDriver
-	 *            driver
-	 * @param String
-	 *            expected title *
+	 * @param WebElement web element whose link is being checked
+	 * @param String expected link
+	 * 
+	 */
+	public static void assertUrl(WebElement element, String expectedUrl) {		
+		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedUrl),
+				"Incorrect link for icon " + element.getAttribute("class"));
+	}
+
+	/**
+	 * Verifies page title.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param WebDriver driver
+	 * @param String expected title
 	 */
 	public static void assertTitle(WebDriver driver, String expectedTitle) {
 		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");

@@ -66,6 +66,23 @@ public class TestHomePage {
 		Utils.assertTitle(homePage.driver, ContactPage.getContactTitle());
 		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}
+	
+	/**
+	 * Test validates that links of social media icons are correct.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 */
+	@Test (priority = 4)
+	public void testSocialMediaIconsLinks() {
+		homePage.open();
+		Utils.webDriverWait(homePage.driver, homePage.getSocialMediaIcons());
+		Assert.assertEquals(5, homePage.getSocialMediaIconList().size(), "Not all social media icons are visible on the home page.");
+		log.info("testSocialMediaIconCount(): VALIDATION SUCCESSFUL! All icons are visible.");
+		for (int i = 0; i < homePage.getSocialMediaIconList().size(); i++) 			
+			Utils.assertUrl(homePage.getSocialMediaIconList().get(i), homePage.getListOfSocialMediaUrls().get(i));		
+		log.info("testSocialMediaIconsLinks(): VALIDATION SUCCESSFUL! All icons have correct links.");
+	}
 
 	@AfterClass
 	public void tearDown() {

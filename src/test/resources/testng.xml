@@ -12,16 +12,16 @@
 			<class name="com.endava.TestMenuPage" />
 		</classes>
 	</test> <!-- Test -->    
-  <test thread-count="5" name="TestAgilePage">
+  	<test thread-count="5" name="TestAgilePage">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.endava.TestAgilePage"/>
         </classes>
-   </test> <!-- Test -->
-  <test thread-count="5" name="TestAutomationPage">
+  	</test> <!-- Test -->
+  	<test thread-count="5" name="TestAutomationPage">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.endava.TestAutomationPage"/>
         </classes>
-   </test> <!-- Test -->
+  	</test> <!-- Test -->
 </suite> <!-- Suite -->
