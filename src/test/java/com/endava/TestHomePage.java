@@ -1,6 +1,8 @@
 package com.endava;
 
 import com.endava.pages.BasePage;
+import com.endava.pages.ContactPage;
+
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -18,7 +20,7 @@ import com.endava.util.Utils;
 public class TestHomePage {
 
 	private HomePage homePage;
-	private MenuPage menuPage;
+	private MenuPage menuPage;	
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
 	@BeforeTest
@@ -47,6 +49,22 @@ public class TestHomePage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
     log.info("testOpenMenu()");
+	}
+	
+	/**
+	 * Test validates that click on the phone icon is a link to the Contact page.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 */
+	@Test (priority = 3)
+	public void testPhoneIconLink() {
+		homePage.open();
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());		
+		Utils.assertUrl(homePage.driver, ContactPage.getContactUrl());
+		Utils.assertTitle(homePage.driver, ContactPage.getContactTitle());
+		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}
 
 	@AfterClass

@@ -4,6 +4,8 @@ import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -18,6 +20,7 @@ public class HomePage extends BasePage {
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
+	private By phoneIcon = By.className("fe_phone");
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -93,5 +96,28 @@ public class HomePage extends BasePage {
 	 */
 	public By getContactButtons() {
 		return contactButtons;
+	}
+	
+	/**
+	 * @author jelena.corak
+	 * @return By search context of the phone icon
+	 */
+	public By getPhoneIcon() {
+		return phoneIcon;
+	}
+	
+	/**
+	 * Clicks on the element.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param By Search context of a web element	 * 
+	 */
+	public void clickOnElement(By context) {
+		WebElement eventElement = driver.findElement(context);
+		String elementClass = eventElement.getAttribute("class");
+		Assert.assertTrue(eventElement.isDisplayed(), "Element is not present.");
+		eventElement.click();
+		log.debug("Clicked on element " + elementClass);
 	}
 }
