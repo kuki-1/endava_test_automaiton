@@ -1,13 +1,12 @@
 package com.endava;
 
+import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -22,42 +21,23 @@ public class TestHomePage {
 	private MenuPage menuPage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
-	/**
-	 * @author Vladimir Krekic
-	 * @param browser web browser defined in testng.xml
-	 */
 	@BeforeTest
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		homePage = Utils.setUpWebBrowser(browser);
-		log.info("Sets up web browser");
+		log.info("setUp()");
 	}
 
-	/**
-	 * Test validates that home page is opened by checking if contact buttons are
-	 * visible on the page, compares current URL and expected URL to see if they
-	 * match, and validates home page title
-	 * 
-	 * @author Vladimir Krekic
-	 */
-	@Test
+	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Url is not the same.");
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()),
-				"Title is not the same.");
+    Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Incorrect HomePage Url");
+		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()), "Incorrect HomePage Title ");
+		log.info("testHomePageIsOpened()");
 	}
 
-	/**
-	 * Test validates that home page is opened by checking if contact buttons are
-	 * visible on the page,validates that solution menus are visible on home page,
-	 * and validates that burger menu is opened by checking if navigation list is
-	 * visible on the page
-	 * 
-	 * @author Vladimir Krekic
-	 */
-	@Test
+	@Test(priority = 2)
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
@@ -66,10 +46,12 @@ public class TestHomePage {
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
+    log.info("testOpenMenu()");
 	}
 
 	@AfterClass
 	public void tearDown() {
 		homePage.quit();
+		log.info("tearDown()");
 	}
 }
