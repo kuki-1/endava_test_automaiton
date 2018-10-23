@@ -48,6 +48,26 @@ public class TestHomePage {
 		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
     log.info("testOpenMenu()");
 	}
+	
+	/**
+	 * Validates text in cookies policy message.
+	 * Clicks on "Learn More" and validates that user is taken to Cookie Policy page.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 */
+	@Test
+	public void testCookiePolicy() {
+		homePage.open();
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		Utils.assertUrl(homePage.driver, homePage.getEndavaURL());
+		Utils.assertTitle(homePage.driver, homePage.getEndavaTitle());
+		homePage.validateCookiesPolicytext();
+		Utils.clickOnElement(homePage.driver, homePage.getCookiesLearnMore());
+		Utils.assertUrl(homePage.driver, "https://www.endava.com/en/Cookie-Policy");
+		Utils.assertTitle(homePage.driver, "Cookie Policy");
+		log.info("VALIDATION SUCCESSFUL! Cookie text is correct and click on Learn More takes to Cookies Policy page.");
+	}
 
 	@AfterClass
 	public void tearDown() {
