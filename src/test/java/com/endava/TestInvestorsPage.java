@@ -43,6 +43,8 @@ class TestInvestorsPage {
         investorsPage = homePage.openInvestorsPage();
         Assert.assertNotEquals(homePage.getEndavaURL(),
                 homePage.driver.getCurrentUrl(),"Url did not changed");
+        Assert.assertEquals(investorsPage.getInvestorsUrl(), investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
+        Assert.assertTrue(InvestorsPage.isTitleCorrect(investorsPage.driver, investorsPage.getInvestorsTitle()), "InvestorsPage Title does not mach");
         Utils.selectElement(investorsPage.getSearch());
         investorsPage.fillSearchBox("blahblah");
         Utils.selectElement(investorsPage.getSubmitButton());

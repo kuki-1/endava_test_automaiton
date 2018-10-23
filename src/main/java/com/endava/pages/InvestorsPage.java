@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 
 public class InvestorsPage extends BasePage {
 
+    private static final String INVESTORS_URL = "https://investors.endava.com/home/default.aspx";
+    private static final String INVESTORS_TITLE = "Endava - Home";
     private WebElement search = driver.findElement(By.className("search-link"));
     private WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"_ctrl0_ctl36_txtSearchInput\"]"));
     private WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"_ctrl0_ctl36_btnSearch\"]"));
@@ -47,5 +49,13 @@ public class InvestorsPage extends BasePage {
 
     public WebElement getSubmitButton() {
         return submitButton;
+    }
+
+    public String getInvestorsUrl() {
+        return INVESTORS_URL;
+    }
+
+    public String getInvestorsTitle() {
+        return INVESTORS_TITLE;
     }
 }
