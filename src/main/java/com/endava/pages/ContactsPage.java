@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ContactsPage extends BasePage {
 
-    public static final String CONTACT_PAGE_URL = "https://www.endava.com/en/Contact";
+    private static final String CONTACT_PAGE_URL = "https://www.endava.com/en/Contact";
     private By servicesRadioButton = By.xpath("//*[@id=\"contact-form\"]/fieldset[1]/p[1]/label");
     private By joinRadioButton = By.xpath("//*[@id=\"contact-form\"]/fieldset[1]/p[2]/label");
     private By joinMessage = By.xpath("//*[@id=\"please-visit\"]");
@@ -34,5 +34,9 @@ public class ContactsPage extends BasePage {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getContactPageUrl() {
+        return CONTACT_PAGE_URL;
     }
 }

@@ -11,8 +11,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static com.endava.pages.ContactsPage.CONTACT_PAGE_URL;
-
 /**
  * @author Vladimir Krekic
  */
@@ -45,7 +43,7 @@ class TestContactPage {
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         contactsPage = homePage.openContactsPage();
-        Assert.assertEquals(CONTACT_PAGE_URL, contactsPage.driver.getCurrentUrl(), "CuntactPage Url does not mach");
+        Assert.assertEquals(contactsPage.getContactPageUrl(), contactsPage.driver.getCurrentUrl(), "CuntactPage Url does not mach");
         Assert.assertFalse(contactsPage.driver.findElement(contactsPage.getServicesRadioButton()).isSelected(),
                 "Element \"ServiceRadioButton\" selected");
         Assert.assertFalse(contactsPage.driver.findElement(contactsPage.getJoinRadioButton()).isSelected(),
