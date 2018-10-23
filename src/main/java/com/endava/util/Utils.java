@@ -132,6 +132,20 @@ public class Utils {
 	}
 	
 	/**
+	 * Asserts that the link in the element is correct.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param WebElement web element whose link is being checked
+	 * @param String expected link
+	 * 
+	 */
+	public static void assertElementLink(WebElement element, String expectedLink) {		
+		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedLink),
+				"Incorrect link for icon " + element.getAttribute("class"));
+	}
+	
+	/**
 	 * Verifies page URL correctness.
 	 * 
 	 * @author jelena.corak
