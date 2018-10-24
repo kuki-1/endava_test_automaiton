@@ -10,7 +10,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
-import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
 /**
@@ -39,7 +38,7 @@ public class TestHomePage {
 		log.info("testHomePageIsOpened()");
 	}
 
-	@Test(priority = 2, dependsOnMethods = { "testHomePageIsOpened" })
+	@Test(priority = 2)
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
@@ -49,9 +48,9 @@ public class TestHomePage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		menuPage.assertPageUrl(homePage.getEndavaURL());
 		log.info("testOpenMenu()");
-	}
+	}	
 	
-    @AfterMethod
+	@AfterMethod
 	public void ifFailed(ITestResult testResult) {
 		if (testResult.getStatus() == ITestResult.FAILURE) {
 			try {
@@ -62,7 +61,6 @@ public class TestHomePage {
 		}
 	}
 
-	
 	@AfterClass
 	public void tearDown() {
 		homePage.quit();

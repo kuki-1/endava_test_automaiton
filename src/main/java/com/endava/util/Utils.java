@@ -99,48 +99,7 @@ public class Utils {
 	public static void makeItVisible(WebElement webElement){
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
-	}
-	
-	/**
-	 * Scrolls element into view.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver
-	 *            driver
-	 * @param By
-	 *            element search context
-	 * 
-	 */
-	public static void scrollIntoView(WebDriver driver, By context) {
-		WebElement element = driver.findElement(context);
-		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-		} catch (Exception g) {
-			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
-			Assert.fail("Element not found.");
-		}
 	}	
-
-	/**
-	 * Returns text contained in the web element.
-	 * 
-	 * @author jelena.corak
-	 * @param WebDriver
-	 *            driver
-	 * @param By
-	 *            Search context of a web element
-	 * 
-	 * @return String text of the web element
-	 */
-	public static String getTextFromElement(WebDriver driver, By context) {
-		WebElement webElement = driver.findElement(context);
-		if (!webElement.isDisplayed()) {
-			Assert.fail("No element found.");
-		}
-		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
-		return webElement.getText();
-	}
 	
 	/**
 	 * Takes screenshot.

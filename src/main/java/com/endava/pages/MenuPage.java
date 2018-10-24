@@ -14,8 +14,7 @@ public class MenuPage extends BasePage {
 
 	private By automationMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[3]/a");
 	private By navigationList = By.className("navigation");
-	private By investorsMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");
-
+	private By investorsMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");		
 	private static Logger log = Logger.getLogger(MenuPage.class);
 
 	public MenuPage(WebDriver driver) {
@@ -59,5 +58,5 @@ public class MenuPage extends BasePage {
 		Assert.assertTrue(investors.isDisplayed(), "Element INVESTORS is not present.");
 		investors.click();
 		return new InvestorsPage(driver);
-	}
+	}	
 }

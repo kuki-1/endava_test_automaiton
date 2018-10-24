@@ -45,14 +45,14 @@ public class TestInvestorsPage {
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		investorsPage = menuPage.clickOnInvestors();
-		investorsPage.assertPageUrl(InvestorsPage.getInvestorsUrl());
+		investorsPage.assertPageUrl(InvestorsPage.getInvestorsUrl());		
 		investorsPage.assertPageTitle(InvestorsPage.getInvestorsTitle());
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getInvestorsAboutUs());
-		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs()).contains("ABOUT US"), "Text \"ABOUT US\" not found!");
+		Assert.assertTrue(investorsPage.getTextFromElement(investorsPage.getInvestorsAboutUs()).contains("ABOUT US"), "Text \"ABOUT US\" not found!");
 		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
 	}
 	
-    @AfterMethod
+	@AfterMethod
 	public void ifFailed(ITestResult testResult) {
 		if (testResult.getStatus() == ITestResult.FAILURE) {
 			try {
@@ -62,8 +62,7 @@ public class TestInvestorsPage {
 			}
 		}
 	}
-
-
+	
 	@AfterTest
 	public void tearDown() {
 		homePage.quit();

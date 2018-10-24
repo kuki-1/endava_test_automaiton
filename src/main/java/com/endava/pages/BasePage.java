@@ -109,6 +109,26 @@ public class BasePage {
 			Assert.fail();
 		}
 	}
+	
+	/**
+	 * Returns text contained in the web element.
+	 * 
+	 * @author jelena.corak
+	 * @param WebDriver
+	 *            driver
+	 * @param By
+	 *            Search context of a web element
+	 * 
+	 * @return String text of the web element
+	 */
+	public String getTextFromElement(By context) {
+		WebElement webElement = driver.findElement(context);
+		if (!webElement.isDisplayed()) {
+			Assert.fail("No element found.");
+		}
+		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
+		return webElement.getText();
+	}
 
 	public void quit() {
 		if (this.driver != null) {

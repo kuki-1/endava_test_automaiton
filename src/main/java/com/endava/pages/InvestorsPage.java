@@ -9,6 +9,7 @@ public class InvestorsPage extends BasePage {
 	private static final String INVESTORS_URL = "https://investors.endava.com/home/default.aspx";
 	private static final String INVESTORS_TITLE = "Investors";
 	private By investorsAboutUs = By.xpath("//*[@id='_ctrl0_ctl66_divModuleContainer']");
+	private By investorsLogo = By.xpath("//img[@src='//s22.q4cdn.com/220269410/files/design/logo-endava.png']");
 	private static Logger log = Logger.getLogger(InvestorsPage.class);
 
 	public InvestorsPage(WebDriver driver) {
@@ -44,6 +45,17 @@ public class InvestorsPage extends BasePage {
 	 */
 	public By getInvestorsAboutUs() {
 		return investorsAboutUs;
+	}
+	
+	/**
+	 * Returns search context of Endava logo element on the INVESTORS page.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @return By search context of About Us element
+	 */
+	public By getInvestorsLogo() {
+		return investorsLogo;
 	}
 
 }

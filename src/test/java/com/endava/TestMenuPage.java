@@ -17,7 +17,7 @@ import com.endava.util.Utils;
 public class TestMenuPage {
 
 	private HomePage homePage;
-	private MenuPage menuPage;
+	private MenuPage menuPage;	
 	private static Logger log = Logger.getLogger(TestMenuPage.class);
 
 	/**
@@ -31,8 +31,8 @@ public class TestMenuPage {
 		homePage = Utils.setUpWebBrowser(browser);
 		log.info("setUp()");
 	}
-
-    @AfterMethod
+	
+	@AfterMethod
 	public void ifFailed(ITestResult testResult) {
 		if (testResult.getStatus() == ITestResult.FAILURE) {
 			try {
