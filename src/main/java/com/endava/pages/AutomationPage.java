@@ -47,7 +47,7 @@ public class AutomationPage extends BasePage {
 	 * @author Goran.Kukolj
 	 * @return String endava automation url
 	 */
-	public String getEndavaAutomationUrl() {
+	public static String getEndavaAutomationUrl() {
 		return ENDAVA_AUTOMATION_URL;
 	}
 
@@ -55,7 +55,7 @@ public class AutomationPage extends BasePage {
 	 * @author Goran.Kukolj
 	 * @return String endava automation title
 	 */
-	public String getEndavaAutomationTitle() {
+	public static String getEndavaAutomationTitle() {
 		return ENDAVA_AUTOMATION_TITLE;
 	}
 }

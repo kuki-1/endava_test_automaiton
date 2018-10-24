@@ -16,6 +16,14 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.OutputType;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author Vladimir Krekic
@@ -91,81 +99,5 @@ public class Utils {
 	public static void makeItVisible(WebElement webElement){
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
-	}
-	
-	/**
-	 * Scrolls element into view.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param By element search context
-	 * 
-	 */
-	public static void scrollIntoView(WebDriver driver, By context) {
-		WebElement element = driver.findElement(context);
-		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-		} catch (Exception g) {
-			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
-			Assert.fail();
-		}
-	}
-
-	/**
-	 * Clicks directly to element in case of overlay.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param By element search context
-	 * 
-	 */
-	public static void directClickOnElement(WebDriver driver, By context) {
-		WebElement element = driver.findElement(context);
-		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-		} catch (Exception ex) {
-			log.debug(">>>> Exception in directClickOnElement! Element may not have been found: " + element);
-			Assert.fail();
-		}
-	}
-	
-	/**
-	 * Verifies page URL.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String expected URL 
-	 */
-	public static void assertUrl(WebDriver driver, String expectedUrl) {
-		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
-	}
-	
-	/**
-	 * Asserts that the link in the element is correct.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebElement web element whose link is being checked
-	 * @param String expected link
-	 * 
-	 */
-	public static void assertUrl(WebElement element, String expectedUrl) {		
-		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedUrl),
-				"Incorrect link for icon " + element.getAttribute("class"));
-	}
-
-	/**
-	 * Verifies page title.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String expected title
-	 */
-	public static void assertTitle(WebDriver driver, String expectedTitle) {
-		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
-	}
+	}			
 }
