@@ -14,8 +14,7 @@ public class MenuPage extends BasePage {
 
 	private By automationMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[3]/a");
 	private By navigationList = By.className("navigation");
-	private By investorsMenuItem = By
-			.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");
+	private By investorsMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");
 	private By investorsAboutUs = By.xpath("//*[@id='_ctrl0_ctl66_divModuleContainer']");
 	private static Logger log = Logger.getLogger(MenuPage.class);
 
@@ -38,7 +37,7 @@ public class MenuPage extends BasePage {
 	public By getNavigationList() {
 		return navigationList;
 	}
-	
+
 	/**
 	 * Returns search context of Investors element in the Menu.
 	 * 
@@ -83,9 +82,19 @@ public class MenuPage extends BasePage {
 	public String getTextFromElement(By context) {
 		WebElement webElement = driver.findElement(context);
 		if (!webElement.isDisplayed()) {
-			Assert.fail("No element found.");			
-		} 
+			Assert.fail("No element found.");
+		}
 		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
 		return webElement.getText();
+	}
+
+	/**
+	 * @author Goran.Kukolj
+	 * @return driver to investors page
+	 */
+	public InvestorsPage openInvestorsPage() {
+		driver.findElement(this.investorsMenuItem).click();
+		log.debug("Opens investors page");
+		return new InvestorsPage(driver);
 	}
 }
