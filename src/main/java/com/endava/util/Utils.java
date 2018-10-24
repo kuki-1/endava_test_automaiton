@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.TestException;
 
 import com.endava.pages.HomePage;
 
@@ -36,7 +37,7 @@ public class Utils {
 		HomePage homePage;
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			homePage = new HomePage(new ChromeDriver());
+			homePage = new HomePage(new ChromeDriver(disableInfobarsOption()));
 		} else if (browser.equalsIgnoreCase("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			homePage = new HomePage(new FirefoxDriver());
@@ -44,8 +45,7 @@ public class Utils {
 			WebDriverManager.iedriver().setup();
 			homePage = new HomePage(new InternetExplorerDriver());
 		} else
-			throw new RuntimeException();
-		log.debug("setUpWebBrowser(browser) - returns HomePage with chosen browser driver");
+			throw new TestException("Incorrect browser setup");
 		return homePage;
 	}
 
@@ -70,42 +70,12 @@ public class Utils {
 	}
 
 	/**
-	 * @author Vladimir Krekic Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public static boolean selectElement(WebElement element) {
-		makeItVisible(element);
-		if (element.isDisplayed()) {
-			element.click();
-			log.debug("WebElement clicked");
-			return true;
-		}
-		log.debug("WebElement not visible");
-		return false;
-	}
-
-	/**
 	 * @author Vladimir Krekic Makes web element visible
 	 * @param webElement
 	 */
 	public static void makeItVisible(WebElement webElement) {
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
-	}
-
-	/**
-	 * @author Goran.Kukolj
-	 * @param driver
-	 * @param locator
-	 * @param originalText
-	 * @return true or false depending on comparing two strings
-	 */
-	public static boolean validateString(WebDriver driver, By locator, String originalText) {
-		WebElement element = driver.findElement(locator);
-		String textToCompare = element.getText();
-		log.debug("Compares two strings");
-		return textToCompare.equals(originalText);
 	}
 
 	/**

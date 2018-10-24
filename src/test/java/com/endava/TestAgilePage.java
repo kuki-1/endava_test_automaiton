@@ -67,21 +67,21 @@ class TestAgilePage {
 				"Agile page title is not the same.");
 		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getAgileUrl()),
 				"Agile page url is not the same.");
-		agilePage.scrollToautofillWithLinkedinButton();
+		agilePage.scrollToAutofillWithLinkedinButton();
 		agilePage.clickOnAutofillWithLinkedinButton();
 		Utils.switchControlToNewWindow(agilePage.driver);
 		Utils.webDriverWait(agilePage.driver, agilePage.getSignInToLinkedinMessage());
-		Assert.assertTrue(Utils.validateString(agilePage.driver, agilePage.getSignInToLinkedinMessage(),
+		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getSignInToLinkedinMessage(),
 				agilePage.getSignInToLinkedin()), "Strings for sign in are not the same");
 		Assert.assertTrue(BasePage.isTitleCorrect(agilePage.driver, agilePage.getPopUpWindowTitle()),
 				"Pop up window title is not the same.");
 		agilePage.enterEmailAddress();
 		agilePage.clickOnAllowAccessButton();
-		Assert.assertTrue(Utils.validateString(agilePage.driver, agilePage.getEnterValidEmailErrorMessage(),
+		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getEnterValidEmailErrorMessage(),
 				agilePage.getEnterValidEmail()), "Strings for email are not the same");
-		Assert.assertTrue(Utils.validateString(agilePage.driver, agilePage.getEnterPasswordErrorMessage(),
+		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getEnterPasswordErrorMessage(),
 				agilePage.getEnterPassword()), "Strings for password are not the same");
-		Assert.assertTrue(Utils.validateString(agilePage.driver, agilePage.getCorrectMarkedFieldsErrorMessage(),
+		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getCorrectMarkedFieldsErrorMessage(),
 				agilePage.getCorrectMarkedFields()), "Strings for marked fields are not the same");
 		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getPopUpWindowSubmitUrl()),
 				"Pop up window url is not the same.");

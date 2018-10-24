@@ -50,7 +50,7 @@ public class AgilePage extends BasePage {
 	 * 
 	 * @author Goran.Kukolj
 	 */
-	public void scrollToautofillWithLinkedinButton() {
+	public void scrollToAutofillWithLinkedinButton() {
 		((JavascriptExecutor) driver).executeScript("scroll(0, 4800);");
 		log.debug("Scrolls to autofill button");
 	}
