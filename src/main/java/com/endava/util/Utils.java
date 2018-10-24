@@ -66,23 +66,6 @@ public class Utils {
 
 	/**
 	 * @author Vladimir Krekic
-	 * Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public static boolean selectElement(WebElement element){
-		makeItVisible(element);
-		if(element.isDisplayed()){
-			element.click();
-			log.debug("WebElement clicked " + element.toString());
-			return true;
-		}
-		log.debug("WebElement not visible " + element.toString());
-		return false;
-	}
-
-	/**
-	 * @author Vladimir Krekic
 	 * Makes web element visible
 	 * @param webElement
 	 */

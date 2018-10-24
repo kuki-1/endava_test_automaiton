@@ -1,6 +1,5 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +43,7 @@ public class HomePage extends BasePage {
 	 * @return AgilePage
 	 */
 	public AgilePage openAgilePage() {
-		if(Utils.selectElement(driver.findElement(this.agileItem))){
+		if(selectElement(driver.findElement(this.agileItem))){
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
 		}else {
@@ -106,7 +105,7 @@ public class HomePage extends BasePage {
 	 * @return LanguageBarPage
 	 */
 	public LanguageBarPage openLanguageBarPage() {
-		if(Utils.selectElement(driver.findElement(this.lenguage))){
+		if(selectElement(driver.findElement(this.lenguage))){
 			log.debug("LanguageBarPage opened and instantiated");
 			return new LanguageBarPage(driver);
 		}else {

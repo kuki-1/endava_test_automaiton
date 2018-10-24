@@ -1,7 +1,9 @@
 package com.endava.pages;
 
+import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -38,6 +40,24 @@ public class BasePage {
 		log.debug("Checks if the URL has changed");
 		return driver.getCurrentUrl().equalsIgnoreCase(title);
 	}
+
+	/**
+	 * @author Vladimir Krekic
+	 * Method is selecting (clicking on) WebElement
+	 * @param element WebElement
+	 * @return boolean
+	 */
+	public boolean selectElement(WebElement element){
+		Utils.makeItVisible(element);
+		if(element.isDisplayed()){
+			element.click();
+			log.debug("WebElement clicked " + element.toString());
+			return true;
+		}
+		log.debug("WebElement not visible " + element.toString());
+		return false;
+	}
+
 
 	public void quit() {
 		if (this.driver != null) {

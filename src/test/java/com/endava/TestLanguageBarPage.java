@@ -35,13 +35,13 @@ class TestLanguageBarPage {
         Utils.webDriverWait(homePage.driver, homePage.getLenguage());
         lenguageBarPage = homePage.openLanguageBarPage();
         Utils.webDriverWait(lenguageBarPage.driver, lenguageBarPage.getDeutschLenguage());
-        Utils.selectElement(lenguageBarPage.driver.findElement(lenguageBarPage.getDeutschLenguage()));
+        lenguageBarPage.selectElement(lenguageBarPage.driver.findElement(lenguageBarPage.getDeutschLenguage()));
         Assert.assertEquals(lenguageBarPage.driver.getCurrentUrl(), lenguageBarPage.getEndavaDeUrl(), "HomePage Deutsch lenguage does not mach");
         Assert.assertTrue(lenguageBarPage.driver.findElement(lenguageBarPage.getCopyRightsMessage()).getText().contains("Alle Rechte vorbehalten"), "DE Copy Rights message does not mach");
         Utils.webDriverWait(homePage.driver, homePage.getLenguage());
-        Utils.selectElement(homePage.driver.findElement(homePage.getLenguage()));
+        lenguageBarPage.selectElement(homePage.driver.findElement(homePage.getLenguage()));
         Utils.webDriverWait(lenguageBarPage.driver, lenguageBarPage.getEnglishLenguage());
-        Utils.selectElement(lenguageBarPage.driver.findElement(lenguageBarPage.getEnglishLenguage()));
+        lenguageBarPage.selectElement(lenguageBarPage.driver.findElement(lenguageBarPage.getEnglishLenguage()));
         Assert.assertEquals(lenguageBarPage.driver.getCurrentUrl(), lenguageBarPage.getEndavaEnUrl(), "HomePage English lenguage does not mach");
         Assert.assertTrue(lenguageBarPage.driver.findElement(lenguageBarPage.getCopyRightsMessage()).getText().contains(" All rights reserved"), "EN Copy Rights message does not mach");
     }
