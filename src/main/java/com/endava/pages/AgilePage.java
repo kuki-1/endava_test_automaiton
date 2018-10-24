@@ -42,7 +42,7 @@ public class AgilePage extends BasePage {
 	 */
 	public void clickOnAutofillWithLinkedinButton() {
 		driver.findElement(this.autofillWithLinkedinButton).click();
-		log.debug("Finds and clicks on autofill with linkedin button");
+		log.debug("Clicks on autofill button");
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class AgilePage extends BasePage {
 	 */
 	public void scrollToautofillWithLinkedinButton() {
 		((JavascriptExecutor) driver).executeScript("scroll(0, 4800);");
-		log.debug("Scrolls to autofill with linkedin button");
+		log.debug("Scrolls to autofill button");
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class AgilePage extends BasePage {
 	 */
 	public void clickOnAllowAccessButton() {
 		driver.findElement(this.allowAccessButton).click();
-		log.debug("Finds and clicks on allow access button");
+		log.debug("Clicks on allow access button");
 	}
 
 	/**
@@ -82,6 +82,7 @@ public class AgilePage extends BasePage {
 	 */
 	public void clickOnCancelButton() {
 		driver.findElement(this.cancelButton).click();
+		log.debug("Clicks on cancel button");
 	}
 
 	public By getAgileOnRibbonMenu() {

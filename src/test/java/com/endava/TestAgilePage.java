@@ -63,10 +63,10 @@ class TestAgilePage {
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		agilePage = homePage.openAgilePage();
-		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getAgileUrl()),
-				"Agile page url is not the same.");
 		Assert.assertTrue(BasePage.isTitleCorrect(agilePage.driver, agilePage.getAgileTitle()),
 				"Agile page title is not the same.");
+		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getAgileUrl()),
+				"Agile page url is not the same.");
 		agilePage.scrollToautofillWithLinkedinButton();
 		agilePage.clickOnAutofillWithLinkedinButton();
 		Utils.switchControlToNewWindow(agilePage.driver);
