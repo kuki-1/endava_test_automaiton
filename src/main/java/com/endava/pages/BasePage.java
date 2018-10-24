@@ -6,6 +6,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.interactions.internal.Coordinates;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -108,6 +110,42 @@ public class BasePage {
 			log.debug(">>>> Exception in directClickOnElement! Element may not have been found: " + element);
 			Assert.fail();
 		}
+	}
+
+	/**
+	 * @author Vladimir Krekic
+	 * Method is selecting (clicking on) WebElement
+	 * @param element WebElement
+	 * @return boolean
+	 */
+	public boolean selectElement(WebElement element){
+		makeItVisible(element);
+		if(element.isDisplayed()){
+			element.click();
+			log.debug("WebElement clicked " + element.toString());
+			return true;
+		}
+		log.debug("WebElement not visible " + element.toString());
+		return false;
+	}
+
+	/**
+	 * @author Vladimir Krekic
+	 * @return search result text
+	 */
+	public String getSearchResult(WebElement element){
+		log.debug("Search Result found on element " + element.toString() );
+		return element.getText();
+	}
+
+	/**
+	 * @author Vladimir Krekic
+	 * Makes web element visible
+	 * @param webElement
+	 */
+	public void makeItVisible(WebElement webElement){
+		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
+		coordinates.inViewPort();
 	}
 
 	public void quit() {

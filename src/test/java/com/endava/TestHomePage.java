@@ -37,7 +37,7 @@ public class TestHomePage {
 		log.info("testHomePageIsOpened()");
 	}
 
-	@Test(priority = 2, dependsOnMethods = { "testHomePageIsOpened" })
+	@Test(priority = 2)
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
