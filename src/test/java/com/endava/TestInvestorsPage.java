@@ -65,10 +65,9 @@ public class TestInvestorsPage {
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         investorsPage = homePage.openInvestorsPage();
-        Assert.assertEquals(investorsPage.getInvestorsUrl(),
-                investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
-        Assert.assertTrue(InvestorsPage.isTitleCorrect
-                (investorsPage.driver, investorsPage.getInvestorsTitle()), "InvestorsPage Title does not mach");
+        Assert.assertEquals(InvestorsPage.getInvestorsUrl(),
+                investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not match");        
+        investorsPage.assertPageTitle(InvestorsPage.getInvestorsTitle());
         investorsPage.selectElement(investorsPage.getSearch());
         investorsPage.fillSearchBox("blahblah");
         investorsPage.selectElement(investorsPage.getSubmitButton());
