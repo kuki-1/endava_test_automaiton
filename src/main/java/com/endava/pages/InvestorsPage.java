@@ -31,7 +31,7 @@ public class InvestorsPage extends BasePage {
      * @param searchText String to be searched for
      */
     public void fillSearchBox(String searchText){
-        Utils.makeItVisible(searchBox);
+        makeItVisible(searchBox);
         if(searchBox.isDisplayed()){
             searchBox.sendKeys(searchText);
             log.debug("Search Box filled with text: " + searchText);

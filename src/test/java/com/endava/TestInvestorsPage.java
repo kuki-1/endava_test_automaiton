@@ -41,8 +41,6 @@ class TestInvestorsPage {
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         investorsPage = homePage.openInvestorsPage();
-        Assert.assertNotEquals(homePage.getEndavaURL(),
-                homePage.driver.getCurrentUrl(),"Url did not changed");
         Assert.assertEquals(investorsPage.getInvestorsUrl(),
                 investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
         Assert.assertTrue(InvestorsPage.isTitleCorrect
@@ -50,7 +48,7 @@ class TestInvestorsPage {
         investorsPage.selectElement(investorsPage.getSearch());
         investorsPage.fillSearchBox("blahblah");
         investorsPage.selectElement(investorsPage.getSubmitButton());
-        Assert.assertEquals(Utils.getSearchResult
+        Assert.assertEquals(investorsPage.getSearchResult
                         (investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
                 investorsPage.getSearchResult(),"Wrong search result");
         log.info("testInvestorsSearch() - test passed");

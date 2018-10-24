@@ -11,9 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.internal.Coordinates;
 
 /**
  * @author Vladimir Krekic
@@ -63,23 +60,4 @@ public class Utils {
 		options.addArguments("disable-infobars");
 		return options;
 	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * Makes web element visible
-	 * @param webElement
-	 */
-	public static void makeItVisible(WebElement webElement){
-		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
-		coordinates.inViewPort();
-	}
-
-    /**
-     * @author Vladimir Krekic
-     * @return search result text
-     */
-    public static String getSearchResult(WebElement element){
-        log.debug("Search Result found on element " + element.toString() );
-        return element.getText();
-    }
 }

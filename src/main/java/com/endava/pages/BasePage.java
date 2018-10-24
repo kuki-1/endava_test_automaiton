@@ -1,9 +1,10 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.interactions.internal.Coordinates;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -48,7 +49,7 @@ public class BasePage {
 	 * @return boolean
 	 */
 	public boolean selectElement(WebElement element){
-		Utils.makeItVisible(element);
+		makeItVisible(element);
 		if(element.isDisplayed()){
 			element.click();
 			log.debug("WebElement clicked " + element.toString());
@@ -58,6 +59,24 @@ public class BasePage {
 		return false;
 	}
 
+	/**
+	 * @author Vladimir Krekic
+	 * @return search result text
+	 */
+	public String getSearchResult(WebElement element){
+		log.debug("Search Result found on element " + element.toString() );
+		return element.getText();
+	}
+
+	/**
+	 * @author Vladimir Krekic
+	 * Makes web element visible
+	 * @param webElement
+	 */
+	public void makeItVisible(WebElement webElement){
+		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
+		coordinates.inViewPort();
+	}
 
 	public void quit() {
 		if (this.driver != null) {
