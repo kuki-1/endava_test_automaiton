@@ -47,9 +47,9 @@ class TestInvestorsPage {
                 investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
         Assert.assertTrue(InvestorsPage.isTitleCorrect
                 (investorsPage.driver, investorsPage.getInvestorsTitle()), "InvestorsPage Title does not mach");
-        Utils.selectElement(investorsPage.getSearch());
+        investorsPage.selectElement(investorsPage.getSearch());
         investorsPage.fillSearchBox("blahblah");
-        Utils.selectElement(investorsPage.getSubmitButton());
+        investorsPage.selectElement(investorsPage.getSubmitButton());
         Assert.assertEquals(Utils.getSearchResult
                         (investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
                 investorsPage.getSearchResult(),"Wrong search result");
