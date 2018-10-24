@@ -21,6 +21,8 @@ public class InvestorsPage extends BasePage {
 	private static final String ENDAVA_INVESTORS_URL = "https://investors.endava.com/home/default.aspx";
 	private static final String ENDAVA_INVESTORS_TITLE = "Endava - Home";
 	private static final String TEXT_ENTRY = "DAVA";
+	private static final String EXPECTED_NUMBER_OF_RESULTS = "3";
+	private static final String MAX_SEARCH_TIME_IN_SECONDS = "2";
 	private static Logger log = Logger.getLogger(InvestorsPage.class);
 
 	public InvestorsPage(WebDriver driver) {
@@ -58,19 +60,10 @@ public class InvestorsPage extends BasePage {
 	 */
 	public boolean isSearchTimeLessThanTwoSeconds() {
 		WebElement element = driver.findElement(this.searchResults);
-		if (element.isDisplayed()) {
-			String resultText = element.getText();
-			float searchTimeInSeconds = Float
-					.parseFloat(resultText.substring(resultText.indexOf('(') + 1, resultText.indexOf('(') + 7));
-			if (searchTimeInSeconds < 2) {
-				log.debug("Search time is less than 2 seconds");
-				return true;
-			} else
-				log.debug("Search time is greater than 2 seconds");
-			return false;
-		} else {
-			return false;
-		}
+		String resultText = element.getText();
+		String searchTimeInSeconds = resultText.substring(resultText.indexOf('(') + 1, resultText.indexOf('(') + 7);
+		log.debug("Comparing search time and expected search time");
+		return (searchTimeInSeconds.compareTo(MAX_SEARCH_TIME_IN_SECONDS) < 0);
 	}
 
 	/**
@@ -79,11 +72,8 @@ public class InvestorsPage extends BasePage {
 	 */
 	public boolean numberOfFoundResults() {
 		String exactNumberOfResults = driver.findElement(this.numberOfResults).getText();
-		if (exactNumberOfResults.equals("3")) {
-			log.debug("Search results are equal to " + exactNumberOfResults);
-			return true;
-		} else
-			return false;
+		log.debug("Search results are equal to " + exactNumberOfResults);
+		return exactNumberOfResults.equals(EXPECTED_NUMBER_OF_RESULTS);
 	}
 
 	/**
@@ -128,5 +118,13 @@ public class InvestorsPage extends BasePage {
 
 	public String getTextEntry() {
 		return TEXT_ENTRY;
+	}
+
+	public String getExpectedNumberOfResults() {
+		return EXPECTED_NUMBER_OF_RESULTS;
+	}
+
+	public static String getMaxSearchTimeInSeconds() {
+		return MAX_SEARCH_TIME_IN_SECONDS;
 	}
 }
