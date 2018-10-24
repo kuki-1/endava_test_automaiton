@@ -14,7 +14,7 @@ public class ContactPage extends BasePage {
     private By servicesRadioButton = By.xpath("//*[@id=\"contact-form\"]/fieldset[1]/p[1]/label");
     private By joinRadioButton = By.xpath("//*[@id=\"contact-form\"]/fieldset[1]/p[2]/label");
     private By joinMessage = By.xpath("//*[@id=\"please-visit\"]");
-    private String message = "Please visit the Careers section on our website to apply for job openings." +
+    private static final String MESSAGE = "Please visit the Careers section on our website to apply for job openings." +
             " Please use the form below if you have another question or important message.";
 
     public ContactPage(WebDriver driver) {
@@ -34,7 +34,7 @@ public class ContactPage extends BasePage {
     }
 
     public String getMessage() {
-        return message;
+        return MESSAGE;
     }
 
     public String getContactPageUrl() {

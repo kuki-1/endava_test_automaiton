@@ -26,7 +26,7 @@ class TestContactPage {
     @Parameters({"browser"})
     public void setUp(String browser) {
         homePage = Utils.setUpWebBrowser(browser);
-        log.info("setUp()");
+        log.info("Seting up " + browser + " browser in TestContactPage");
     }
 
     /**
@@ -49,7 +49,7 @@ class TestContactPage {
                 "Element \"ServiceRadioButton\" selected");
         Assert.assertFalse(contactsPage.driver.findElement(contactsPage.getJoinRadioButton()).isSelected(),
                 "Element \"JoinRadioButton\" selected");
-        Utils.selectElement(contactsPage.driver.findElement(contactsPage.getJoinRadioButton()));
+        contactsPage.selectElement(contactsPage.driver.findElement(contactsPage.getJoinRadioButton()));
         Assert.assertFalse(Utils.getSearchResult(contactsPage.driver.findElement(contactsPage.getJoinMessage())).isEmpty(),
                 "Element \"JoinRadioButton\" not selected");
         Assert.assertEquals(contactsPage.getMessage(),
@@ -61,6 +61,6 @@ class TestContactPage {
     @AfterTest
     public void tearDown() {
         homePage.quit();
-        log.info("tearDown()");
+        log.info("Closing browser in TestContactPage");
     }
 }

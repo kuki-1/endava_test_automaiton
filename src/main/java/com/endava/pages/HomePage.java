@@ -44,7 +44,7 @@ public class HomePage extends BasePage {
 	 * @return AgilePage
 	 */
 	public AgilePage openAgilePage() {
-		if(Utils.selectElement(driver.findElement(this.agileItem))){
+		if(selectElement(driver.findElement(this.agileItem))){
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
 		}else {
@@ -103,7 +103,7 @@ public class HomePage extends BasePage {
 	 * @return ContactPage
 	 */
 	public ContactPage openContactsPage(){
-		if(Utils.selectElement(driver.findElement(this.contact))){
+		if(selectElement(driver.findElement(this.contact))){
 			log.debug("ContactPage opened and instantiated");
 			return new ContactPage(driver);
 		}else {
