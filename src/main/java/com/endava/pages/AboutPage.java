@@ -4,7 +4,6 @@ package com.endava.pages;
  * @author Vladimir Krekic
  */
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,7 @@ public class AboutPage extends BasePage {
     private List<WebElement> listOfCities = driver.findElements(cities);
     private List<WebElement> listOfAddresses = driver.findElements(addresses);
     private Set<String> allLocations = setAllLocations();
-    private static final List<String> ADRESE = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
+    private static final List<String> ADDRESSES = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
             "BOGOTÁ", "Calle 96 No. 10-38, Edificio BOX, 7th & 8th Floor, Bogota D.C.", "ATLANTA", "One Glenlake Pkwy, Suite 784",
             "AMSTERDAM", "Laapersveld 43, Hilversum", "CARACAS", "Av. Francisco de MirandaTorre HP, Piso 18. Municipio Chacao",
             "BUCHAREST", "4G Vasile Milea Blvd., 9th floor, AFI 3 Business Park", "BUENOS AIRES", "San Martin 439",
@@ -52,7 +51,7 @@ public class AboutPage extends BasePage {
         for(int counter = 0; counter < 6; counter ++) {
             addLocations(allLocations, listOfCities);
             addLocations(allLocations, listOfAddresses);
-            Utils.selectElement(rightArrow);
+            selectElement(rightArrow);
         }
         log.debug("Set of addresses grabbed");
         return allLocations;
@@ -79,13 +78,13 @@ public class AboutPage extends BasePage {
      *                   and prints list of elements not matching if false
      */
     public boolean checkAddresses (Set<String> addresses){
-        if(addresses.size() == ADRESE.size()){
+        if(addresses.size() == ADDRESSES.size()){
             return addresses.stream()
-                    .filter(address-> !ADRESE.contains(address))
+                    .filter(address-> !ADDRESSES.contains(address))
                     .peek(System.out::println) //prints list of elements not matching
                     .count() == 0;
         }
-        log.debug("Number of grabbed addresses not matching. Size of set should be " + ADRESE.size() + " found: " + addresses.size());
+        log.debug("Number of grabbed addresses not matching. Size of set should be " + ADDRESSES.size() + " found: " + addresses.size());
         return false;
     }
 

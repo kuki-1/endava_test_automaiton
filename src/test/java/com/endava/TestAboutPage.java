@@ -1,7 +1,6 @@
 package com.endava;
 
 import com.endava.pages.AboutPage;
-import com.endava.pages.AgilePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -43,7 +42,6 @@ class TestAboutPage {
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         aboutPage = homePage.openAboutPage();
-        Assert.assertNotEquals(homePage.getEndavaURL(), homePage.driver.getCurrentUrl(), "Url did not changed");
         Assert.assertEquals(aboutPage.driver.getCurrentUrl(), aboutPage.getAboutUrl(), "Incorrect AboutPage Url");
         Assert.assertTrue(AboutPage.isTitleCorrect(aboutPage.driver, aboutPage.getAboutTitle()), "Incorrect AboutPage Title ");
         Assert.assertTrue(aboutPage.checkAddresses(aboutPage.getAllLocations()), "Locations do not mach");

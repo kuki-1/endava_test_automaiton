@@ -6,7 +6,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;

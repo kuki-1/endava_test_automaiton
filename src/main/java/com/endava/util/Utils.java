@@ -11,13 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Vladimir Krekic
@@ -66,23 +62,6 @@ public class Utils {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("disable-infobars");
 		return options;
-	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public static boolean selectElement(WebElement element){
-		makeItVisible(element);
-		if(element.isDisplayed()){
-			element.click();
-			log.debug("WebElement clicked " + element.toString());
-			return true;
-		}
-		log.debug("WebElement not visible " + element.toString());
-		return false;
 	}
 
 	/**

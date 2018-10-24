@@ -1,7 +1,6 @@
 package com.endava;
 
 import com.endava.pages.AgilePage;
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
