@@ -22,7 +22,7 @@ public class HomePage extends BasePage {
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
 	private By cookiesPolicyMessage = By.xpath("//*[@id=\"homePage\"]/div[7]");
 	private By cookiesLearnMore = By.xpath("//*[@id=\"homePage\"]/div[7]/div/div/div[2]/div/div[1]/p/a");
-  private static Logger log = Logger.getLogger(HomePage.class);
+	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -41,16 +41,16 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * Opens AgilePage and instantiate AgilePage object
-	 * if Agile item is present on "burger" menu
+	 * Opens AgilePage and instantiate AgilePage object if Agile item is present on "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return AgilePage
 	 */
 	public AgilePage openAgilePage() {
-		if(Utils.selectElement(driver.findElement(this.agileItem))){
+		if (Utils.selectElement(driver.findElement(this.agileItem))) {
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
-		}else {
+		} else {
 			log.debug("Agile item on \"burger\" menu is not present");
 			return null;
 		}
@@ -114,7 +114,12 @@ public class HomePage extends BasePage {
 	public By getCookiesLearnMore() {
 		return cookiesLearnMore;
 	}
-
+	
+	/**
+	 * Validates Cookies Policy element text.
+	 * 
+	 * @author jelena.corak
+	 */
 	public void validateCookiesPolicytext() {
 		WebElement cookiesMessage = driver.findElement(cookiesPolicyMessage);
 		if (cookiesMessage.isDisplayed()) {
