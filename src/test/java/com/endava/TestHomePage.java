@@ -1,6 +1,5 @@
 package com.endava;
 
-import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -32,13 +31,13 @@ public class TestHomePage {
 	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
-    Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Incorrect HomePage Url");
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()), "Incorrect HomePage Title ");
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		homePage.assertPageUrl(homePage.getEndavaURL());
+		homePage.assertPageTitle(homePage.getEndavaTitle());
 		log.info("testHomePageIsOpened()");
 	}
 
-	@Test(priority = 2, dependsOnMethods = {"testHomePageIsOpened"})
+	@Test(priority = 2, dependsOnMethods = { "testHomePageIsOpened" })
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
@@ -46,10 +45,10 @@ public class TestHomePage {
 		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menus are not visible.");
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
-    log.info("testOpenMenu()");
+		menuPage.assertPageUrl(homePage.getEndavaURL());
+		log.info("testOpenMenu()");
 	}
-	
+
 	/**
 	 * Test validates that click on the phone icon is a link to the Contact page.
 	 * 
@@ -60,9 +59,11 @@ public class TestHomePage {
 	public void testPhoneIconLink() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());		
-		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), ContactPage.getContactUrl().toLowerCase(), "Incorrect URL!");		
-		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), ContactPage.getContactTitle().toLowerCase(), "Incorrect title!");
+		homePage.assertPageTitle(homePage.getEndavaTitle());
+		homePage.assertPageUrl(homePage.getEndavaURL());
+		homePage.directClickOnElement(homePage.getPhoneIcon());		
+		homePage.assertPageUrl(ContactPage.getContactUrl());		
+		homePage.assertPageTitle(ContactPage.getContactTitle());
 		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}
 

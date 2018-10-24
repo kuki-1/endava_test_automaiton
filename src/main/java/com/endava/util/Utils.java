@@ -112,28 +112,7 @@ public class Utils {
 			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
 			Assert.fail("Element not found.");
 		}
-	}
-
-	/**
-	 * Clicks directly to element in case of overlay.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver
-	 *            driver
-	 * @param By
-	 *            element search context
-	 * 
-	 */
-	public static void directClickOnElement(WebDriver driver, By context) {
-		WebElement element = driver.findElement(context);
-		try {
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-		} catch (Exception ex) {
-			log.debug(">>>> Exception in directClickOnElement! Element may not have been found: " + element);
-			Assert.fail("Element not found.");
-		}
-	}
+	}	
 
 	/**
 	 * Returns text contained in the web element.
