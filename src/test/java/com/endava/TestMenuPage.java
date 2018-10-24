@@ -1,12 +1,11 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -33,32 +32,18 @@ public class TestMenuPage {
 		log.info("setUp()");
 	}
 
-	/**
-	 * @author jelena.corak
-	 *
-	 *         Test validates that the string "ABOUT US" is visible on the
-	 *         "INVESTORS" page in the menu.
-	 */
-	@Test
-	public void testAboutUsVisibility() {
-		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), homePage.getEndavaURL().toLowerCase(),
-				"Incorrect URL!");
-		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), homePage.getEndavaTitle().toLowerCase(),
-				"Incorrect title!");
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		menuPage = homePage.openMenu();
-		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		menuPage.clickOnInvestors();
-		Assert.assertEquals(menuPage.driver.getCurrentUrl(), "https://investors.endava.com/home/default.aspx",
-				"Incorrect URL for the INVESTORS page!");		
-		Utils.webDriverWait(menuPage.driver, menuPage.getInvestorsAboutUs());
-		Assert.assertTrue(menuPage.getTextFromElement(menuPage.getInvestorsAboutUs()).contains("ABOUT US"),
-				"Text \"ABOUT US\" not found!");
-		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
+    @AfterMethod
+	public void ifFailed(ITestResult testResult) {
+		if (testResult.getStatus() == ITestResult.FAILURE) {
+			try {
+				Utils.takeScreenShot(menuPage.driver, testResult.getMethod().getMethodName());
+			} catch (Exception e) {
+				log.error("Screenshot failed.", e);
+			}
+		}
 	}
-
-	@AfterTest
+	
+	@AfterClass
 	public void tearDown() {
 		menuPage.quit();
 		log.info("tearDown()");

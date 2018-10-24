@@ -8,16 +8,22 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.OutputType;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author Vladimir Krekic
@@ -35,7 +41,7 @@ public class Utils {
 		HomePage homePage;
 		if(browser.equalsIgnoreCase("chrome")){
 			WebDriverManager.chromedriver().setup();
-			homePage = new HomePage(new ChromeDriver());
+			homePage = new HomePage(new ChromeDriver(disableInfobarsOption()));
 		}else if(browser.equalsIgnoreCase("firefox")){
 			WebDriverManager.firefoxdriver().setup();
 			homePage = new HomePage(new FirefoxDriver());
@@ -93,5 +99,63 @@ public class Utils {
 	public static void makeItVisible(WebElement webElement){
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
+	}
+	
+	/**
+	 * Scrolls element into view.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param WebDriver
+	 *            driver
+	 * @param By
+	 *            element search context
+	 * 
+	 */
+	public static void scrollIntoView(WebDriver driver, By context) {
+		WebElement element = driver.findElement(context);
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		} catch (Exception g) {
+			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
+			Assert.fail("Element not found.");
+		}
+	}	
+
+	/**
+	 * Returns text contained in the web element.
+	 * 
+	 * @author jelena.corak
+	 * @param WebDriver
+	 *            driver
+	 * @param By
+	 *            Search context of a web element
+	 * 
+	 * @return String text of the web element
+	 */
+	public static String getTextFromElement(WebDriver driver, By context) {
+		WebElement webElement = driver.findElement(context);
+		if (!webElement.isDisplayed()) {
+			Assert.fail("No element found.");
+		}
+		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
+		return webElement.getText();
+	}
+	
+	/**
+	 * Takes screenshot.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param driver
+	 * @throws Exception
+	 */
+	public static void takeScreenShot(WebDriver driver, String testName) throws Exception {
+		WebDriver augmentedDriver = new Augmenter().augment(driver);
+		TakesScreenshot screenShot = ((TakesScreenshot) augmentedDriver);
+		File srcFile = screenShot.getScreenshotAs(OutputType.FILE);
+		String filePath = "test-output/screenshot_" + testName + "_" + new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()) + ".jpg";
+		File destinationFile = new File(filePath);
+		FileUtils.copyFile(srcFile, destinationFile);
 	}
 }

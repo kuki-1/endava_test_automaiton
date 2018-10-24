@@ -1,12 +1,13 @@
 package com.endava;
 
 import com.endava.pages.AgilePage;
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -41,10 +42,21 @@ class TestAgilePage {
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         agilePage = homePage.openAgilePage();
         Assert.assertEquals(agilePage.driver.getCurrentUrl(), agilePage.getAgileUrl(), "Incorrect AgilePage Url");
-        Assert.assertTrue(AgilePage.isTitleCorrect(agilePage.driver, agilePage.getAgileTitle()), "Incorrect AgilePage Title ");
+        agilePage.assertPageTitle(agilePage.getAgileTitle());
         Assert.assertEquals(agilePage.driver.findElement(agilePage.getAgileOnRibbonMenu()).getAttribute("class"), "active");
         log.debug("testAgileItemActiveInDAAMenu() - Test passed - AGILE menu item is active in DIGITAL - AGILE - AUTOMATION menu");
     }
+    
+    @AfterMethod
+	public void ifFailed(ITestResult testResult) {
+		if (testResult.getStatus() == ITestResult.FAILURE) {
+			try {
+				Utils.takeScreenShot(agilePage.driver, testResult.getMethod().getMethodName());
+			} catch (Exception e) {
+				log.error("Screenshot failed.", e);
+			}
+		}
+	}
 
     @AfterTest
     public void tearDown() {

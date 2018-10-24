@@ -5,4 +5,4 @@
 .settings/
 test-output/
 *.log
-.idea
+.idea*.jpg

@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
-	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
+	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");	
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {

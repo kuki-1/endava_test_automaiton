@@ -1,14 +1,16 @@
 package com.endava;
 
-import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
+import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
 /**
@@ -31,13 +33,13 @@ public class TestHomePage {
 	@Test(priority = 1)
 	public void testHomePageIsOpened() {
 		homePage.open();
-    Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Incorrect HomePage Url");
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()), "Incorrect HomePage Title ");
+		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+		homePage.assertPageUrl(homePage.getEndavaURL());
+		homePage.assertPageTitle(homePage.getEndavaTitle());
 		log.info("testHomePageIsOpened()");
 	}
 
-	@Test(priority = 2, dependsOnMethods = {"testHomePageIsOpened"})
+	@Test(priority = 2, dependsOnMethods = { "testHomePageIsOpened" })
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
@@ -45,10 +47,22 @@ public class TestHomePage {
 		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menus are not visible.");
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		Assert.assertTrue(BasePage.isURLTheSame(menuPage.driver, homePage.getEndavaURL()), "URL is not the same.");
-    log.info("testOpenMenu()");
+		menuPage.assertPageUrl(homePage.getEndavaURL());
+		log.info("testOpenMenu()");
+	}
+	
+    @AfterMethod
+	public void ifFailed(ITestResult testResult) {
+		if (testResult.getStatus() == ITestResult.FAILURE) {
+			try {
+				Utils.takeScreenShot(homePage.driver, testResult.getMethod().getMethodName());
+			} catch (Exception e) {
+				log.error("Screenshot failed.", e);
+			}
+		}
 	}
 
+	
 	@AfterClass
 	public void tearDown() {
 		homePage.quit();
