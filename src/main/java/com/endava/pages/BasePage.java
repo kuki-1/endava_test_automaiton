@@ -1,7 +1,10 @@
 package com.endava.pages;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -37,6 +40,45 @@ public class BasePage {
 	public static boolean isURLTheSame(WebDriver driver, String title) {
 		log.debug("Checks if the URL has changed");
 		return driver.getCurrentUrl().equalsIgnoreCase(title);
+	}
+	
+	/**
+	 * Verifies page URL correctness.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param WebDriver driver
+	 * @param String expected URL *
+	 */
+	public void assertUrl(WebDriver driver, String expectedUrl) {
+		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
+	}
+
+	/**
+	 * Verifies page title correctness.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param WebDriver driver
+	 * @param String expected title
+	 */
+	public void assertTitle(WebDriver driver, String expectedTitle) {
+		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
+	}
+
+	/**
+	 * Clicks on the element.
+	 * 
+	 * @author jelena.corak
+	 * 
+	 * @param By Search context of a web element *
+	 */
+	public void clickOnElement(By context) {
+		WebElement eventElement = driver.findElement(context);
+		String elementClass = eventElement.getAttribute("class");
+		Assert.assertTrue(eventElement.isDisplayed(), "Element is not present.");
+		eventElement.click();
+		log.debug("Clicked on element " + elementClass);
 	}
 
 	public void quit() {

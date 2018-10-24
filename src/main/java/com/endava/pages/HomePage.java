@@ -4,8 +4,6 @@ import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -104,20 +102,5 @@ public class HomePage extends BasePage {
 	 */
 	public By getPhoneIcon() {
 		return phoneIcon;
-	}
-	
-	/**
-	 * Clicks on the element.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param By Search context of a web element	 * 
-	 */
-	public void clickOnElement(By context) {
-		WebElement eventElement = driver.findElement(context);
-		String elementClass = eventElement.getAttribute("class");
-		Assert.assertTrue(eventElement.isDisplayed(), "Element is not present.");
-		eventElement.click();
-		log.debug("Clicked on element " + elementClass);
 	}
 }

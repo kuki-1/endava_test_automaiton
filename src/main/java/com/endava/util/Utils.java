@@ -98,8 +98,10 @@ public class Utils {
 	 * 
 	 * @author jelena.corak
 	 * 
-	 * @param WebDriver driver
-	 * @param By element search context
+	 * @param WebDriver
+	 *            driver
+	 * @param By
+	 *            element search context
 	 * 
 	 */
 	public static void scrollIntoView(WebDriver driver, By context) {
@@ -108,7 +110,7 @@ public class Utils {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		} catch (Exception g) {
 			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
-			Assert.fail();
+			Assert.fail("Element not found.");
 		}
 	}
 
@@ -117,8 +119,10 @@ public class Utils {
 	 * 
 	 * @author jelena.corak
 	 * 
-	 * @param WebDriver driver
-	 * @param By element search context
+	 * @param WebDriver
+	 *            driver
+	 * @param By
+	 *            element search context
 	 * 
 	 */
 	public static void directClickOnElement(WebDriver driver, By context) {
@@ -127,35 +131,27 @@ public class Utils {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 		} catch (Exception ex) {
 			log.debug(">>>> Exception in directClickOnElement! Element may not have been found: " + element);
-			Assert.fail();
+			Assert.fail("Element not found.");
 		}
-	}
-	
-	/**
-	 * Verifies page URL correctness.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver
-	 *            driver
-	 * @param String
-	 *            expected URL *
-	 */
-	public static void assertUrl(WebDriver driver, String expectedUrl) {
-		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
 	}
 
 	/**
-	 * Verifies page title correctness.
+	 * Returns text contained in the web element.
 	 * 
 	 * @author jelena.corak
-	 * 
 	 * @param WebDriver
 	 *            driver
-	 * @param String
-	 *            expected title *
+	 * @param By
+	 *            Search context of a web element
+	 * 
+	 * @return String text of the web element
 	 */
-	public static void assertTitle(WebDriver driver, String expectedTitle) {
-		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
+	public static String getTextFromElement(WebDriver driver, By context) {
+		WebElement webElement = driver.findElement(context);
+		if (!webElement.isDisplayed()) {
+			Assert.fail("No element found.");
+		}
+		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
+		return webElement.getText();
 	}
 }

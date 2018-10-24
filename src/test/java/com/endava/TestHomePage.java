@@ -1,8 +1,6 @@
 package com.endava;
 
 import com.endava.pages.BasePage;
-import com.endava.pages.ContactPage;
-
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -11,6 +9,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
+import com.endava.pages.BasePage;
+import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
 /**
@@ -20,7 +20,7 @@ import com.endava.util.Utils;
 public class TestHomePage {
 
 	private HomePage homePage;
-	private MenuPage menuPage;	
+	private MenuPage menuPage;
 	private static Logger log = Logger.getLogger(TestHomePage.class);
 
 	@BeforeTest
@@ -39,7 +39,7 @@ public class TestHomePage {
 		log.info("testHomePageIsOpened()");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, dependsOnMethods = {"testHomePageIsOpened"})
 	public void testOpenMenu() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
@@ -57,13 +57,13 @@ public class TestHomePage {
 	 * @author jelena.corak
 	 * 
 	 */
-	@Test (priority = 3)
+	@Test(priority = 3)
 	public void testPhoneIconLink() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());		
-		Utils.assertUrl(homePage.driver, ContactPage.getContactUrl());
-		Utils.assertTitle(homePage.driver, ContactPage.getContactTitle());
+		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());
+		homePage.assertUrl(homePage.driver, ContactPage.getContactUrl());
+		homePage.assertTitle(homePage.driver, ContactPage.getContactTitle());
 		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}
 
