@@ -26,7 +26,7 @@ public class AboutPage extends BasePage {
     private List<WebElement> listOfCities = driver.findElements(cities);
     private List<WebElement> listOfAddresses = driver.findElements(addresses);
     private Set<String> allLocations = setAllLocations();
-    private static final List<String> ADDRESSES = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
+    private static final List<String> ADDRESSES_OF_ENDAVA_LOCATIONS = Arrays.asList("BELGRADE", "9đ, Milutina Milankovića St.",
             "BOGOTÁ", "Calle 96 No. 10-38, Edificio BOX, 7th & 8th Floor, Bogota D.C.", "ATLANTA", "One Glenlake Pkwy, Suite 784",
             "AMSTERDAM", "Laapersveld 43, Hilversum", "CARACAS", "Av. Francisco de MirandaTorre HP, Piso 18. Municipio Chacao",
             "BUCHAREST", "4G Vasile Milea Blvd., 9th floor, AFI 3 Business Park", "BUENOS AIRES", "San Martin 439",
@@ -47,14 +47,14 @@ public class AboutPage extends BasePage {
      * @return Set of cities and addresses grabbed from web site
      */
     public Set<String> setAllLocations(){
-        Set<String> allLocations = new LinkedHashSet<>();
+        Set<String> setOfAllLocations = new LinkedHashSet<>();
         for(int counter = 0; counter < 6; counter ++) {
-            addLocations(allLocations, listOfCities);
-            addLocations(allLocations, listOfAddresses);
+            addLocations(setOfAllLocations, listOfCities);
+            addLocations(setOfAllLocations, listOfAddresses);
             selectElement(rightArrow);
         }
         log.debug("Set of addresses grabbed");
-        return allLocations;
+        return setOfAllLocations;
     }
 
     /**
@@ -78,13 +78,13 @@ public class AboutPage extends BasePage {
      *                   and prints list of elements not matching if false
      */
     public boolean checkAddresses (Set<String> addresses){
-        if(addresses.size() == ADDRESSES.size()){
+        if(addresses.size() == ADDRESSES_OF_ENDAVA_LOCATIONS.size()){
             return addresses.stream()
-                    .filter(address-> !ADDRESSES.contains(address))
-                    .peek(System.out::println) //prints list of elements not matching
+                    .filter(address-> !ADDRESSES_OF_ENDAVA_LOCATIONS.contains(address))
+                    .peek(log::debug) //prints list of elements not matching
                     .count() == 0;
         }
-        log.debug("Number of grabbed addresses not matching. Size of set should be " + ADDRESSES.size() + " found: " + addresses.size());
+        log.debug("Number of grabbed addresses not matching. Size of set should be " + ADDRESSES_OF_ENDAVA_LOCATIONS.size() + " found: " + addresses.size());
         return false;
     }
 
