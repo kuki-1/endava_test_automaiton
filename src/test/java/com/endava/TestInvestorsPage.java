@@ -6,7 +6,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.InvestorsPage;
 import com.endava.pages.MenuPage;
@@ -37,18 +36,18 @@ public class TestInvestorsPage {
 	 */
 	@Test
 	public void testAboutUsVisibility() {
-		homePage.open();
-		homePage.assertUrl(homePage.driver, homePage.getEndavaURL());
-		homePage.assertTitle(homePage.driver, homePage.getEndavaTitle());
+		homePage.open();		
+		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), homePage.getEndavaURL().toLowerCase(), "Incorrect URL!");		
+		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), homePage.getEndavaTitle().toLowerCase(), "Incorrect title!");
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		investorsPage = menuPage.clickOnInvestors();
-		investorsPage.assertUrl(investorsPage.driver, InvestorsPage.getInvestorsUrl());
+		investorsPage = menuPage.clickOnInvestors();		
+		Assert.assertEquals(investorsPage.driver.getCurrentUrl().toLowerCase(), InvestorsPage.getInvestorsUrl().toLowerCase(), "Incorrect URL!");
 		/*
 		 * Incorrect title of Investors page. Title verification skipped, since it fails.
-		 */
-		// investorsPage.assertTitle(investorsPage.driver, InvestorsPage.getInvestorsTitle());
+		 */		
+		//Assert.assertEquals(investorsPage.driver.getTitle().toLowerCase(), InvestorsPage.getInvestorsTitle().toLowerCase(), "Incorrect title!");
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getInvestorsAboutUs());
 		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs()).contains("ABOUT US"), "Text \"ABOUT US\" not found!");
 		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");

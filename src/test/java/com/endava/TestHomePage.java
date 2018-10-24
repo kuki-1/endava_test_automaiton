@@ -9,7 +9,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
-import com.endava.pages.BasePage;
 import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
@@ -61,9 +60,9 @@ public class TestHomePage {
 	public void testPhoneIconLink() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());
-		homePage.assertUrl(homePage.driver, ContactPage.getContactUrl());
-		homePage.assertTitle(homePage.driver, ContactPage.getContactTitle());
+		Utils.directClickOnElement(homePage.driver, homePage.getPhoneIcon());		
+		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), ContactPage.getContactUrl().toLowerCase(), "Incorrect URL!");		
+		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), ContactPage.getContactTitle().toLowerCase(), "Incorrect title!");
 		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}
 

@@ -43,30 +43,6 @@ public class BasePage {
 	}
 	
 	/**
-	 * Verifies page URL correctness.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String expected URL *
-	 */
-	public void assertUrl(WebDriver driver, String expectedUrl) {
-		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
-	}
-
-	/**
-	 * Verifies page title correctness.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String expected title
-	 */
-	public void assertTitle(WebDriver driver, String expectedTitle) {
-		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
-	}
-
-	/**
 	 * Clicks on the element.
 	 * 
 	 * @author jelena.corak
