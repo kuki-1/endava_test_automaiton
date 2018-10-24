@@ -1,12 +1,9 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -33,29 +30,7 @@ public class TestMenuPage {
 		log.info("setUp()");
 	}
 
-	/**
-	 * @author jelena.corak
-	 *
-	 *         Test validates that the string "ABOUT US" is visible on the
-	 *         "INVESTORS" page in the menu.
-	 */
-	@Test
-	public void testAboutUsVisibility() {
-		homePage.open();		
-		Utils.assertUrl(homePage.driver, homePage.getEndavaURL());
-		Utils.assertTitle(homePage.driver, homePage.getEndavaTitle());
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		menuPage = homePage.openMenu();
-		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		menuPage.clickOnInvestors();		
-		Utils.assertUrl(menuPage.driver, "https://investors.endava.com/home/default.aspx");
-		Utils.webDriverWait(menuPage.driver, menuPage.getInvestorsAboutUs());
-		Assert.assertTrue(menuPage.getTextFromElement(menuPage.getInvestorsAboutUs()).contains("ABOUT US"),
-				"Text \"ABOUT US\" not found!");
-		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
-	}
-
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		menuPage.quit();
 		log.info("tearDown()");

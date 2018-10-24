@@ -15,7 +15,7 @@ public class ContactPage extends BasePage {
 	private static final String CONTACT_URL = "https://www.endava.com/en/Contact";
 	private static final String CONTACT_TITLE = "Contact Us";
 	private By contactMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[10]/a");
-	private static Logger log = Logger.getLogger(AutomationPage.class);
+	private static Logger log = Logger.getLogger(ContactPage.class);
 		
 	public ContactPage(WebDriver driver) {
 		super(driver);		

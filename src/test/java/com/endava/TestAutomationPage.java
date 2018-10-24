@@ -45,12 +45,10 @@ public class TestAutomationPage {
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		automationPage = menuPage.openAutomationPage();
-		Utils.webDriverWait(automationPage.driver, automationPage.getAutomationPageLink());
-		Assert.assertTrue(BasePage.isTitleCorrect(automationPage.driver, automationPage.getEndavaAutomationTitle()),
-				"Title is not the same.");
-		Assert.assertTrue(automationPage.isAutomationPageLinkActive(), "Link is not active.");
-		Assert.assertTrue(BasePage.isURLTheSame(automationPage.driver, automationPage.getEndavaAutomationUrl()),
-				"URL is not the same.");
+		Utils.webDriverWait(automationPage.driver, automationPage.getAutomationPageLink());		
+		automationPage.assertPageTitle(automationPage.getEndavaAutomationTitle());
+		Assert.assertTrue(automationPage.isAutomationPageLinkActive(), "Link is not active.");		
+		automationPage.assertPageUrl(automationPage.getEndavaAutomationUrl());
 	}
 
 	@AfterMethod

@@ -65,10 +65,11 @@ public class MenuPage extends BasePage {
 	 * 
 	 * @author jelena.corak
 	 */
-	public void clickOnInvestors() {
+	public InvestorsPage clickOnInvestors() {
 		WebElement investors = driver.findElement(investorsMenuItem);
 		Assert.assertTrue(investors.isDisplayed(), "Element INVESTORS is not present.");
 		investors.click();
+		return new InvestorsPage(driver);
 	}
 
 	/**
