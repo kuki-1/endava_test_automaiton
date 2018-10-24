@@ -47,7 +47,7 @@ public class BasePage {
 	 * @param element WebElement
 	 * @return boolean
 	 */
-	public static boolean selectElement(WebElement element){
+	public boolean selectElement(WebElement element){
 		Utils.makeItVisible(element);
 		if(element.isDisplayed()){
 			element.click();

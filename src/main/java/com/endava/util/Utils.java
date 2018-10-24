@@ -63,7 +63,7 @@ public class Utils {
 		options.addArguments("disable-infobars");
 		return options;
 	}
-
+	
 	/**
 	 * @author Vladimir Krekic
 	 * Makes web element visible
