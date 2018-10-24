@@ -11,13 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Vladimir Krekic
@@ -35,7 +31,7 @@ public class Utils {
 		HomePage homePage;
 		if(browser.equalsIgnoreCase("chrome")){
 			WebDriverManager.chromedriver().setup();
-			homePage = new HomePage(new ChromeDriver());
+			homePage = new HomePage(new ChromeDriver(disableInfobarsOption()));
 		}else if(browser.equalsIgnoreCase("firefox")){
 			WebDriverManager.firefoxdriver().setup();
 			homePage = new HomePage(new FirefoxDriver());
@@ -78,10 +74,10 @@ public class Utils {
 		makeItVisible(element);
 		if(element.isDisplayed()){
 			element.click();
-			log.debug("WebElement clicked");
+			log.debug("WebElement clicked " + element.toString());
 			return true;
 		}
-		log.debug("WebElement not visible");
+		log.debug("WebElement not visible " + element.toString());
 		return false;
 	}
 

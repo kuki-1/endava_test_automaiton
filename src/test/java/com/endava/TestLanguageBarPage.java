@@ -24,7 +24,7 @@ class TestLanguageBarPage {
     @Parameters({"browser"})
     public void setUp(String browser){
         homePage = Utils.setUpWebBrowser(browser);
-        log.debug("setUp() - in TestLangugeBarPage");
+        log.debug("Seting up " + browser + " browser in TestLangugeBarPage");
     }
 
     @Test
@@ -50,6 +50,6 @@ class TestLanguageBarPage {
     @AfterTest
     public void tearDown() {
         homePage.quit();
-        log.info("tearDown() - in TestLanguageBarPage");
+        log.info("Closing browser in TestLanguageBarPage");
     }
 }
