@@ -51,7 +51,8 @@ public class TestHomePage {
 		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()),
 				"Incorrect HomePage Title ");
 		homePage.clickOnShareIcon();
-		Assert.assertTrue(Utils.validateString(homePage.driver, homePage.getShareMenu(), homePage.getShareMenuText()),
+		Assert.assertTrue(
+				HomePage.validateString(homePage.driver, homePage.getShareMenu(), homePage.getShareMenuText()),
 				"Share menu is not opened");
 		Assert.assertTrue(homePage.areShareOptionsPresent(), "Share options are present");
 		homePage.clickOnShareIcon();
