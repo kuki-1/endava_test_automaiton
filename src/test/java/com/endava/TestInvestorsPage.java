@@ -20,13 +20,13 @@ class TestInvestorsPage {
     private HomePage homePage;
     private MenuPage menuPage;
     private InvestorsPage investorsPage;
-    private static Logger log = Logger.getLogger(InvestorsPage.class);
+    private static Logger log = Logger.getLogger(TestInvestorsPage.class);
 
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         homePage = Utils.setUpWebBrowser(browser);
-        log.info("setUp()");
+        log.info("Setting up chosen browser: " + browser);
     }
 
     /**
@@ -43,20 +43,22 @@ class TestInvestorsPage {
         investorsPage = homePage.openInvestorsPage();
         Assert.assertNotEquals(homePage.getEndavaURL(),
                 homePage.driver.getCurrentUrl(),"Url did not changed");
-        Assert.assertEquals(investorsPage.getInvestorsUrl(), investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
-        Assert.assertTrue(InvestorsPage.isTitleCorrect(investorsPage.driver, investorsPage.getInvestorsTitle()), "InvestorsPage Title does not mach");
+        Assert.assertEquals(investorsPage.getInvestorsUrl(),
+                investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not mach");
+        Assert.assertTrue(InvestorsPage.isTitleCorrect
+                (investorsPage.driver, investorsPage.getInvestorsTitle()), "InvestorsPage Title does not mach");
         Utils.selectElement(investorsPage.getSearch());
         investorsPage.fillSearchBox("blahblah");
         Utils.selectElement(investorsPage.getSubmitButton());
         Assert.assertEquals(Utils.getSearchResult
                         (investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
-                "No results found.","Wrong search result");
+                investorsPage.getSearchResult(),"Wrong search result");
         log.info("testInvestorsSearch() - test passed");
     }
 
     @AfterTest
     public void tearDown() {
         homePage.quit();
-        log.info("tearDown()");
+        log.info("Closing browser");
     }
 }
