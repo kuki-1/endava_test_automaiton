@@ -35,7 +35,7 @@ public class Utils {
 		HomePage homePage;
 		if(browser.equalsIgnoreCase("chrome")){
 			WebDriverManager.chromedriver().setup();
-			homePage = new HomePage(new ChromeDriver());
+			homePage = new HomePage(new ChromeDriver(disableInfobarsOption()));
 		}else if(browser.equalsIgnoreCase("firefox")){
 			WebDriverManager.firefoxdriver().setup();
 			homePage = new HomePage(new FirefoxDriver());
@@ -78,10 +78,10 @@ public class Utils {
 		makeItVisible(element);
 		if(element.isDisplayed()){
 			element.click();
-			log.debug("WebElement clicked");
+			log.debug("WebElement clicked " + element.toString());
 			return true;
 		}
-		log.debug("WebElement not visible");
+		log.debug("WebElement not visible " + element.toString());
 		return false;
 	}
 
