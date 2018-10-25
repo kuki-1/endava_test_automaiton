@@ -17,6 +17,7 @@ public class HomePage extends BasePage {
 	private By solutionMenus = By.className("proposition-section");
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
+	private By contact = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[10]/a");
 	private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
   	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
   	private By phoneIcon = By.className("fe_phone");
@@ -99,6 +100,18 @@ public class HomePage extends BasePage {
 	}
 
 	/**
+	 * Opens ContactPage and instantiate ContactPage object
+	 * if "Contacts" item is present on "burger" menu
+	 * @author Vladimir Krekic
+	 * @return ContactPage
+	 */
+	public ContactPage openContactsPage(){
+		if(selectElement(driver.findElement(this.contact))){
+			log.debug("ContactPage opened and instantiated");
+			return new ContactPage(driver);
+		}else {
+			log.debug("Contacts item on \"burger\" menu is not present");
+/**
 	 * Opens AboutPage and instantiate AboutPage object
 	 * if About item is present on "burger" menu
 	 * @author Vladimir Krekic

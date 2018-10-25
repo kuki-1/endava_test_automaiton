@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -144,6 +145,23 @@ public class BasePage {
 	}
 
 	/**
+	 * @author Vladimir Krekic
+	 * Method is selecting (clicking on) WebElement
+	 * @param element WebElement
+	 * @return boolean
+	 */
+	public boolean selectElement(WebElement element){
+		Utils.makeItVisible(element);
+		if(element.isDisplayed()){
+			element.click();
+			log.debug("WebElement clicked " + element.toString());
+			return true;
+		}
+		log.debug("WebElement not visible " + element.toString());
+		return false;
+	}
+
+
 	 * @author Goran.Kukolj
 	 * @param driver
 	 * @param locator
