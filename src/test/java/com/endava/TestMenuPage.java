@@ -1,12 +1,9 @@
 package com.endava;
 
 import org.apache.log4j.Logger;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -31,6 +28,7 @@ public class TestMenuPage {
         log.info("setUp()");
     }
 
+<<<<<<< HEAD
     /**
      * @author jelena.corak
      * <p>
@@ -61,4 +59,11 @@ public class TestMenuPage {
         menuPage.quit();
         log.info("tearDown()");
     }
+=======
+	@AfterClass
+	public void tearDown() {
+		menuPage.quit();
+		log.info("tearDown()");
+	}
+>>>>>>> 772b66bd05b6f2c690c8a8b843c35cbd8de03393
 }
