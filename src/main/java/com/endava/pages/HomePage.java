@@ -40,8 +40,9 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * Opens AgilePage and instantiate AgilePage object
-	 * if Agile item is present on "burger" menu
+	 * Opens AgilePage and instantiate AgilePage object if Agile item is present on
+	 * "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return AgilePage
 	 */
@@ -49,7 +50,7 @@ public class HomePage extends BasePage {
 		if(selectElement(driver.findElement(this.agileItem))){
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
-		}else {
+		} else {
 			log.debug("Agile item on \"burger\" menu is not present");
 			return null;
 		}
