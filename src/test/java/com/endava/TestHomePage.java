@@ -7,10 +7,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.endava.pages.BasePage;
+import com.endava.pages.ContactPage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
-import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
 /**
@@ -48,9 +47,8 @@ public class TestHomePage {
 	public void testShareIcon() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		Assert.assertTrue(BasePage.isURLTheSame(homePage.driver, homePage.getEndavaURL()), "Incorrect HomePage Url");
-		Assert.assertTrue(BasePage.isTitleCorrect(homePage.driver, homePage.getEndavaTitle()),
-				"Incorrect HomePage Title ");
+		homePage.assertPageUrl(homePage.getEndavaURL());
+		homePage.assertPageTitle(homePage.getEndavaTitle());
 		homePage.clickOnShareIcon();
 		Assert.assertTrue(
 				HomePage.validateString(homePage.driver, homePage.getShareMenu(), homePage.getShareMenuText()),
@@ -77,14 +75,14 @@ public class TestHomePage {
 	 * @author jelena.corak
 	 * 
 	 */
-	@Test(priority = 3)
+	@Test(priority = 4)
 	public void testPhoneIconLink() {
 		homePage.open();
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		homePage.assertPageTitle(homePage.getEndavaTitle());
 		homePage.assertPageUrl(homePage.getEndavaURL());
-		homePage.directClickOnElement(homePage.getPhoneIcon());		
-		homePage.assertPageUrl(ContactPage.getContactUrl());		
+		homePage.directClickOnElement(homePage.getPhoneIcon());
+		homePage.assertPageUrl(ContactPage.getContactUrl());
 		homePage.assertPageTitle(ContactPage.getContactTitle());
 		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
 	}

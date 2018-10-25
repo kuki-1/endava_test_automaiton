@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
+import org.testng.Assert;
 
 /**
  * @author jana.djordjevic@endava.com
@@ -28,19 +28,19 @@ public class BasePage {
 	 * @author jelena.corak
 	 * 
 	 * @param WebDriver driver
-	 * @param String expected URL *
+	 * @param String    expected URL *
 	 */
 	public void assertPageUrl(String expectedUrl) {
 		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
 	}
-	
+
 	/**
 	 * Verifies page title.
 	 * 
 	 * @author jelena.corak
 	 * 
 	 * @param WebDriver driver
-	 * @param String expected title
+	 * @param String    expected title
 	 */
 	public void assertPageTitle(String expectedTitle) {
 		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
@@ -63,7 +63,7 @@ public class BasePage {
 			log.debug(">>>> Exception in scrollIntoView! Element may not have been found: " + element);
 			Assert.fail();
 		}
-	}	
+	}
 
 	/**
 	 * Asserts that the link in the element is correct.
@@ -75,9 +75,10 @@ public class BasePage {
 	 * 
 	 */
 	public static void assertElementLink(WebElement element, String expectedLink) {
-		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedLink), "Incorrect link for icon " + element.getAttribute("class"));
+		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedLink),
+				"Incorrect link for icon " + element.getAttribute("class"));
 	}
-	
+
 	/**
 	 * Clicks on the element.
 	 * 
@@ -92,7 +93,7 @@ public class BasePage {
 		eventElement.click();
 		log.debug("Clicked on element " + elementClass);
 	}
-	
+
 	/**
 	 * Clicks directly to element in case of overlay.
 	 * 
@@ -114,38 +115,11 @@ public class BasePage {
 
 	/**
 	 * @author Vladimir Krekic
-	 * Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public boolean selectElement(WebElement element){
-		makeItVisible(element);
-		if(element.isDisplayed()){
-			element.click();
-			log.debug("WebElement clicked " + element.toString());
-			return true;
-		}
-		log.debug("WebElement not visible " + element.toString());
-		return false;
-	}
-
-	/**
-	 * @author Vladimir Krekic
 	 * @return search result text
 	 */
-	public String getSearchResult(WebElement element){
-		log.debug("Search Result found on element " + element.toString() );
+	public String getSearchResult(WebElement element) {
+		log.debug("Search Result found on element " + element.toString());
 		return element.getText();
-	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * Makes web element visible
-	 * @param webElement
-	 */
-	public void makeItVisible(WebElement webElement){
-		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
-		coordinates.inViewPort();
 	}
 
 	/**
