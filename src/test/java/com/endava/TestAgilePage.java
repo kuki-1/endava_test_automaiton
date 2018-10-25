@@ -1,16 +1,16 @@
 package com.endava;
 
-import com.endava.pages.AgilePage;
-import com.endava.pages.HomePage;
-import com.endava.pages.MenuPage;
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import com.endava.pages.BasePage;
+
+import com.endava.pages.AgilePage;
+import com.endava.pages.HomePage;
+import com.endava.pages.MenuPage;
+import com.endava.util.Utils;
 
 /**
  * @author Vladimir Krekic
@@ -41,8 +41,7 @@ class TestAgilePage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		agilePage = homePage.openAgilePage();
 		Assert.assertEquals(agilePage.driver.getCurrentUrl(), agilePage.getAgileUrl(), "Incorrect AgilePage Url");
-		Assert.assertTrue(AgilePage.isTitleCorrect(agilePage.driver, agilePage.getAgileTitle()),
-				"Incorrect AgilePage Title ");
+		agilePage.assertPageTitle(agilePage.getAgileTitle());
 		Assert.assertEquals(agilePage.driver.findElement(agilePage.getAgileOnRibbonMenu()).getAttribute("class"),
 				"active");
 		log.debug(
@@ -62,18 +61,15 @@ class TestAgilePage {
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		agilePage = homePage.openAgilePage();
-		Assert.assertTrue(BasePage.isTitleCorrect(agilePage.driver, agilePage.getAgileTitle()),
-				"Agile page title is not the same.");
-		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getAgileUrl()),
-				"Agile page url is not the same.");
+		agilePage.assertPageTitle(agilePage.getAgileTitle());
+		agilePage.assertPageUrl(agilePage.getAgileUrl());
 		agilePage.scrollToAutofillWithLinkedinButton();
 		agilePage.clickOnAutofillWithLinkedinButton();
 		Utils.switchControlToNewWindow(agilePage.driver);
 		Utils.webDriverWait(agilePage.driver, agilePage.getSignInToLinkedinMessage());
 		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getSignInToLinkedinMessage(),
 				agilePage.getSignInToLinkedin()), "Strings for sign in are not the same");
-		Assert.assertTrue(BasePage.isTitleCorrect(agilePage.driver, agilePage.getPopUpWindowTitle()),
-				"Pop up window title is not the same.");
+		agilePage.assertPageTitle(agilePage.getPopUpWindowTitle());
 		agilePage.enterEmailAddress();
 		agilePage.clickOnAllowAccessButton();
 		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getEnterValidEmailErrorMessage(),
@@ -82,12 +78,10 @@ class TestAgilePage {
 				agilePage.getEnterPassword()), "Strings for password are not the same");
 		Assert.assertTrue(agilePage.validateString(agilePage.driver, agilePage.getCorrectMarkedFieldsErrorMessage(),
 				agilePage.getCorrectMarkedFields()), "Strings for marked fields are not the same");
-		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getPopUpWindowSubmitUrl()),
-				"Pop up window url is not the same.");
+		agilePage.assertPageUrl(agilePage.getPopUpWindowSubmitUrl());
 		agilePage.clickOnCancelButton();
 		Utils.switchControlToNewWindow(agilePage.driver);
-		Assert.assertTrue(BasePage.isURLTheSame(agilePage.driver, agilePage.getAgileUrl()),
-				"Agile page url is not the same.");
+		agilePage.assertPageUrl(agilePage.getAgileUrl());
 	}
 
 	@AfterClass
