@@ -14,9 +14,8 @@ public class MenuPage extends BasePage {
 
 	private By automationMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[3]/a");
 	private By navigationList = By.className("navigation");
-	private By investorsMenuItem = By
-			.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");
-	private By investorsAboutUs = By.xpath("//*[@id='_ctrl0_ctl66_divModuleContainer']");
+	private By investorsMenuItem = By.xpath(".//*[@id='mCSB_1_container']/div[1]/nav/ul/li[5]/a");
+
 	private static Logger log = Logger.getLogger(MenuPage.class);
 
 	public MenuPage(WebDriver driver) {
@@ -38,7 +37,7 @@ public class MenuPage extends BasePage {
 	public By getNavigationList() {
 		return navigationList;
 	}
-	
+
 	/**
 	 * Returns search context of Investors element in the Menu.
 	 * 
@@ -51,41 +50,14 @@ public class MenuPage extends BasePage {
 	}
 
 	/**
-	 * Returns search context of About Us element on the INVESTORS page.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 * @return By search context of About Us element
-	 */
-	public By getInvestorsAboutUs() {
-		return investorsAboutUs;
-	}
-
-	/**
 	 * Finds the INVESTORS element in the menu and clicks on it.
 	 * 
 	 * @author jelena.corak
 	 */
-	public void clickOnInvestors() {
+	public InvestorsPage clickOnInvestors() {
 		WebElement investors = driver.findElement(investorsMenuItem);
 		Assert.assertTrue(investors.isDisplayed(), "Element INVESTORS is not present.");
 		investors.click();
-	}
-
-	/**
-	 * Returns text contained in the web element.
-	 * 
-	 * @author jelena.corak
-	 * @param By Search context of a web element
-	 * 
-	 * @return String text of the web element
-	 */
-	public String getTextFromElement(By context) {
-		WebElement webElement = driver.findElement(context);
-		if (!webElement.isDisplayed()) {
-			Assert.fail("No element found.");			
-		} 
-		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
-		return webElement.getText();
+		return new InvestorsPage(driver);
 	}
 }

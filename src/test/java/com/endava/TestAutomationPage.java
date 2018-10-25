@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.AutomationPage;
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -45,11 +44,9 @@ public class TestAutomationPage {
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		automationPage = menuPage.openAutomationPage();
 		Utils.webDriverWait(automationPage.driver, automationPage.getAutomationPageLink());
-		Assert.assertTrue(BasePage.isTitleCorrect(automationPage.driver, automationPage.getEndavaAutomationTitle()),
-				"Title is not the same.");
+		automationPage.assertPageTitle(automationPage.getEndavaAutomationTitle());
 		Assert.assertTrue(automationPage.isAutomationPageLinkActive(), "Link is not active.");
-		Assert.assertTrue(BasePage.isURLTheSame(automationPage.driver, automationPage.getEndavaAutomationUrl()),
-				"URL is not the same.");
+		automationPage.assertPageUrl(automationPage.getEndavaAutomationUrl());
 	}
 
 	@AfterMethod
