@@ -26,9 +26,8 @@ public class BasePage {
 	 * Verifies page URL.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String    expected URL *
+	 *
+	 * @param String expected URL
 	 */
 	public void assertPageUrl(String expectedUrl) {
 		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
@@ -38,9 +37,8 @@ public class BasePage {
 	 * Verifies page title.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String    expected title
+	 *
+	 * @param String expected title
 	 */
 	public void assertPageTitle(String expectedTitle) {
 		Assert.assertEquals(driver.getTitle().toLowerCase(), expectedTitle.toLowerCase(), "Incorrect title!");
@@ -50,9 +48,8 @@ public class BasePage {
 	 * Scrolls element into view.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param By        element search context
+	 *
+	 * @param By element search context
 	 * 
 	 */
 	public void scrollIntoView(By context) {
@@ -98,8 +95,7 @@ public class BasePage {
 	 * Clicks directly to element in case of overlay.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
+	 *
 	 * @param By        element search context
 	 * 
 	 */
@@ -114,20 +110,11 @@ public class BasePage {
 	}
 
 	/**
-	 * @author Vladimir Krekic
-	 * @return search result text
-	 */
-	public String getSearchResult(WebElement element) {
-		log.debug("Search Result found on element " + element.toString());
-		return element.getText();
-	}
-
-	/**
 	 * @author Vladimir Krekic Method is selecting (clicking on) WebElement
 	 * @param element WebElement
 	 * @return boolean
 	 */
-	public static boolean selectElement(WebElement element) {
+	public boolean selectElement(WebElement element) {
 		makeItVisible(element);
 		if (element.isDisplayed()) {
 			element.click();
@@ -142,9 +129,14 @@ public class BasePage {
 	 * @author Vladimir Krekic Makes web element visible
 	 * @param webElement
 	 */
-	public static void makeItVisible(WebElement webElement) {
+  public void makeItVisible(WebElement webElement) {
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
+	}
+  
+	public String getSearchResult(WebElement element) {
+		log.debug("Search Result found on element " + element.toString());
+		return element.getText();
 	}
 
 	/**
@@ -154,7 +146,7 @@ public class BasePage {
 	 * @param originalText
 	 * @return true or false depending on comparing two strings
 	 */
-	public static boolean validateString(WebDriver driver, By locator, String originalText) {
+	public boolean validateString(WebDriver driver, By locator, String originalText) {
 		WebElement element = driver.findElement(locator);
 		String textToCompare = element.getText();
 		log.debug("Compares two strings");

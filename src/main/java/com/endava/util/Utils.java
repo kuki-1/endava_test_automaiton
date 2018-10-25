@@ -11,6 +11,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.TestException;
 
 import com.endava.pages.HomePage;
 
@@ -41,8 +42,7 @@ public class Utils {
 			WebDriverManager.iedriver().setup();
 			homePage = new HomePage(new InternetExplorerDriver());
 		} else
-			throw new RuntimeException();
-		log.debug("setUpWebBrowser(browser) - returns HomePage with chosen browser driver");
+			throw new TestException("Incorrect browser setup");
 		return homePage;
 	}
 
@@ -82,5 +82,23 @@ public class Utils {
 		}
 		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
 		return webElement.getText();
+	}
+
+	/**
+	 * Transfers control to other window
+	 * 
+	 * @author Goran.Kukolj
+	 * @param driver
+	 */
+	public static void switchControlToNewWindow(WebDriver driver) {
+		String mainWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String window : windows) {
+			if (!window.equals(mainWindow)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+		log.debug("Transfers control to other window");
 	}
 }

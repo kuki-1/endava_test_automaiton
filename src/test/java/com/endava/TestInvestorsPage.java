@@ -75,9 +75,9 @@ public class TestInvestorsPage {
 		investorsPage = homePage.openInvestorsPage();
 		Assert.assertEquals(InvestorsPage.getInvestorsUrl(), investorsPage.driver.getCurrentUrl(),
 				"InvestorsPage Url does not match");
-		InvestorsPage.selectElement(investorsPage.getSearch());
+		investorsPage.selectElement(investorsPage.getSearch());
 		investorsPage.fillSearchBox("blahblah");
-		InvestorsPage.selectElement(investorsPage.getSubmitButton());
+		investorsPage.selectElement(investorsPage.getSubmitButton());
 		Assert.assertEquals(
 				investorsPage.getSearchResult(investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
 				investorsPage.getSearchResult(), "Wrong search result");

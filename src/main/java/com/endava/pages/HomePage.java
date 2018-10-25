@@ -27,8 +27,10 @@ public class HomePage extends BasePage {
 	private By shareMenuOptions = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/div/ul/li[*]/a");
   private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
   private By phoneIcon = By.className("fe_phone");
+	private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
+  	
+  	private static Logger log = Logger.getLogger(HomePage.class);
 
-  private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -136,6 +138,21 @@ public class HomePage extends BasePage {
 
 	public static int getShareMenuNumberOfOptions() {
 		return SHARE_MENU_NUMBER_OF_OPTIONS;
+
+	/**
+	 * Opens AboutPage and instantiate AboutPage object
+	 * if About item is present on "burger" menu
+	 * @author Vladimir Krekic
+	 * @return AboutPage
+	 */
+	public AboutPage openAboutPage(){
+		if(selectElement(driver.findElement(this.about))){
+			log.debug("AboutPage opened and instantiated");
+			return new AboutPage(driver);
+		}else {
+			log.debug("About item on \"burger\" menu is not present");
+			return null;
+		}
 	}
 	
 	/**
