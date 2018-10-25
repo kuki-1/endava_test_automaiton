@@ -18,8 +18,14 @@ public class InvestorsPage extends BasePage {
 	private By searchField = By.xpath("//*[@id=\"_ctrl0_ctl36_txtSearchInput\"]");
 	private By numberOfResults = By.xpath("//*[@id=\"_ctrl0_ctl72_lblSummary\"]/strong[2]");
 	private By searchResults = By.xpath("//*[@id=\"_ctrl0_ctl72_lblSummary\"]");
-	private static final String ENDAVA_INVESTORS_URL = "https://investors.endava.com/home/default.aspx";
-	private static final String ENDAVA_INVESTORS_TITLE = "Endava - Home";
+  private WebElement search = driver.findElement(By.className("search-link"));
+  private WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"_ctrl0_ctl36_txtSearchInput\"]"));
+  private WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"_ctrl0_ctl36_btnSearch\"]"));
+  private By searchResultElement = By.className("module_message");
+  private By investorsAboutUs = By.xpath("//*[@id='_ctrl0_ctl66_divModuleContainer']");
+	private static final String INVESTORS_URL = "https://investors.endava.com/home/default.aspx";
+  private static final String INVESTORS_TITLE = "Investors";
+  private static final String SEARCH_RESULT = "No results found.";
 	private static final String TEXT_ENTRY = "DAVA";
 	private static final String EXPECTED_NUMBER_OF_RESULTS = "3";
 	private static final String MAX_SEARCH_TIME_IN_SECONDS = "2";
@@ -28,6 +34,22 @@ public class InvestorsPage extends BasePage {
 	public InvestorsPage(WebDriver driver) {
 		super(driver);
 	}
+  
+  /**
+     * @author Vladimir Krekic
+     * Finds searchBox and fills it with search text
+     * @param searchText String to be searched for
+     */
+    public void fillSearchBox(String searchText){
+        makeItVisible(searchBox);
+        if(searchBox.isDisplayed()){
+            searchBox.sendKeys(searchText);
+            log.debug("Search Box filled with text: " + searchText);
+        }else {
+            log.debug("Search box not present - test failed");
+            driver.quit();
+        }
+    }
 
 	/**
 	 * Finds the search button on the page by scrolling to it,and clicks on it
@@ -100,21 +122,29 @@ public class InvestorsPage extends BasePage {
 		return numberOfResults;
 	}
 
-	/**
-	 * @author Goran.Kukolj
-	 * @return String endava investors page title
-	 */
-	public String getEndavaInvestorsTitle() {
-		return ENDAVA_INVESTORS_TITLE;
-	}
+	public WebElement getSearch() {
+        return search;
+    }
 
-	/**
-	 * @author Goran.Kukolj
-	 * @return String endava investors page URL
-	 */
-	public String getEndavaInvestorsUrl() {
-		return ENDAVA_INVESTORS_URL;
-	}
+    public By getSearchResultElement() {
+        return searchResultElement;
+    }
+
+    public WebElement getSubmitButton() {
+        return submitButton;
+    }
+
+    public static String getInvestorsUrl() {
+        return INVESTORS_URL;
+    }
+
+    public static String getInvestorsTitle() {
+        return INVESTORS_TITLE;
+    }
+
+    public String getSearchResult() {
+        return SEARCH_RESULT;
+    }
 
 	public String getTextEntry() {
 		return TEXT_ENTRY;
@@ -126,5 +156,15 @@ public class InvestorsPage extends BasePage {
 
 	public static String getMaxSearchTimeInSeconds() {
 		return MAX_SEARCH_TIME_IN_SECONDS;
+	}
+  
+  /**
+	 * Returns search context of About Us element on the INVESTORS page.
+	 * 
+	 * @author jelena.corak	 
+	 * @return By search context of About Us element
+	 */
+	public By getInvestorsAboutUs() {
+		return investorsAboutUs;
 	}
 }
