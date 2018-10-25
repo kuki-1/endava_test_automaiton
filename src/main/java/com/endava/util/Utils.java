@@ -9,12 +9,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.internal.Coordinates;
 import org.apache.log4j.Logger;
 
 /**
@@ -84,5 +81,5 @@ public class Utils {
  		}
  		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
  		return webElement.getText();
-}
+ 	}
 }

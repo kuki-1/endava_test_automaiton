@@ -26,20 +26,18 @@ public class BasePage {
 	 * Verifies page URL.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param String expected URL *
+	 *
+	 * @param String expected URL
 	 */
 	public void assertPageUrl(String expectedUrl) {
 		Assert.assertEquals(driver.getCurrentUrl().toLowerCase(), expectedUrl.toLowerCase(), "Incorrect URL!");
 	}
-	
+
 	/**
 	 * Verifies page title.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
+	 *
 	 * @param String expected title
 	 */
 	public void assertPageTitle(String expectedTitle) {
@@ -50,9 +48,8 @@ public class BasePage {
 	 * Scrolls element into view.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
-	 * @param By        element search context
+	 *
+	 * @param By element search context
 	 * 
 	 */
 	public void scrollIntoView(By context) {
@@ -97,8 +94,7 @@ public class BasePage {
 	 * Clicks directly to element in case of overlay.
 	 * 
 	 * @author jelena.corak
-	 * 
-	 * @param WebDriver driver
+	 *
 	 * @param By        element search context
 	 * 
 	 */
@@ -136,33 +132,6 @@ public class BasePage {
 	public String getSearchResult(WebElement element){
 		log.debug("Search Result found on element " + element.toString() );
 		return element.getText();
-	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * Makes web element visible
-	 * @param webElement
-	 */
-	public void makeItVisible(WebElement webElement){
-		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
-		coordinates.inViewPort();
-	}
-
-	/**
-	 * @author Vladimir Krekic
-	 * Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public boolean selectElement(WebElement element){
-		makeItVisible(element);
-		if(element.isDisplayed()){
-			element.click();
-			log.debug("WebElement clicked " + element.toString());
-			return true;
-		}
-		log.debug("WebElement not visible " + element.toString());
-		return false;
 	}
 
 	/**

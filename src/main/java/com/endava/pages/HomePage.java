@@ -18,10 +18,9 @@ public class HomePage extends BasePage {
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
 	private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
-  private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
-  private By phoneIcon = By.className("fe_phone");
-
-  private static Logger log = Logger.getLogger(HomePage.class);
+  	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+  	private By phoneIcon = By.className("fe_phone");
+  	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);

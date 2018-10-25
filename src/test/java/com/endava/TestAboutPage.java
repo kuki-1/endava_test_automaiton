@@ -43,7 +43,7 @@ class TestAboutPage {
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         aboutPage = homePage.openAboutPage();
         Assert.assertEquals(aboutPage.driver.getCurrentUrl(), aboutPage.getAboutUrl(), "Incorrect AboutPage Url");
-        Assert.assertTrue(AboutPage.isTitleCorrect(aboutPage.driver, aboutPage.getAboutTitle()), "Incorrect AboutPage Title ");
+        aboutPage.assertPageTitle(aboutPage.getAboutTitle());
         Assert.assertTrue(aboutPage.checkAddresses(aboutPage.getAllLocations()), "Locations do not mach");
         log.info("testAllLocations() - Test passed");
     }
