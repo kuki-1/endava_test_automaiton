@@ -1,6 +1,5 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -73,7 +72,7 @@ public class BasePage {
 	 * 
 	 */
 	public static void assertElementLink(WebElement element, String expectedLink) {
-		Assert.assertTrue(element.getAttribute("href").equalsIgnoreCase(expectedLink),
+		Assert.assertEquals(element.getAttribute("href").equalsIgnoreCase(expectedLink),
 				"Incorrect link for icon " + element.getAttribute("class"));
 	}
 
@@ -97,7 +96,7 @@ public class BasePage {
 	 * 
 	 * @author jelena.corak
 	 *
-	 * @param By        element search context
+	 * @param By element search context
 	 * 
 	 */
 	public void directClickOnElement(By context) {
@@ -130,45 +129,47 @@ public class BasePage {
 	 * @author Vladimir Krekic Makes web element visible
 	 * @param webElement
 	 */
-  public void makeItVisible(WebElement webElement) {
+	public void makeItVisible(WebElement webElement) {
 		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
 		coordinates.inViewPort();
 	}
-  
+
 	public String getSearchResult(WebElement element) {
 		log.debug("Search Result found on element " + element.toString());
 		return element.getText();
 	}
 
 	/**
-	 * @author Vladimir Krekic
-	 * Method is selecting (clicking on) WebElement
-	 * @param element WebElement
-	 * @return boolean
-	 */
-	public boolean selectElement(WebElement element){
-		Utils.makeItVisible(element);
-		if(element.isDisplayed()){
-			element.click();
-			log.debug("WebElement clicked " + element.toString());
-			return true;
-		}
-		log.debug("WebElement not visible " + element.toString());
-		return false;
-	}
-
-
 	 * @author Goran.Kukolj
 	 * @param driver
 	 * @param locator
 	 * @param originalText
 	 * @return true or false depending on comparing two strings
 	 */
+
 	public boolean validateString(WebDriver driver, By locator, String originalText) {
 		WebElement element = driver.findElement(locator);
 		String textToCompare = element.getText();
 		log.debug("Compares two strings");
 		return textToCompare.equals(originalText);
+	}
+
+	/**
+	 * Returns text contained in the web element.
+	 * 
+	 * @author jelena.corak
+	 * @param WebDriver driver
+	 * @param By        Search context of a web element
+	 * 
+	 * @return String text of the web element
+	 */
+	public static String getTextFromElement(WebDriver driver, By context) {
+		WebElement webElement = driver.findElement(context);
+		if (!webElement.isDisplayed()) {
+			Assert.fail("No element found.");
+		}
+		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
+		return webElement.getText();
 	}
 
 	public void quit() {

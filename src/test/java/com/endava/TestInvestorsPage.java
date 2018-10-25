@@ -49,14 +49,8 @@ public class TestInvestorsPage {
 		investorsPage = menuPage.clickOnInvestors();
 		Assert.assertEquals(investorsPage.driver.getCurrentUrl().toLowerCase(),
 				InvestorsPage.getInvestorsUrl().toLowerCase(), "Incorrect URL!");
-		/*
-		 * Incorrect title of Investors page. Title verification skipped, since it
-		 * fails.
-		 */
-		// Assert.assertEquals(investorsPage.driver.getTitle().toLowerCase(),
-		// InvestorsPage.getInvestorsTitle().toLowerCase(), "Incorrect title!");
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getInvestorsAboutUs());
-		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs())
+		Assert.assertTrue(InvestorsPage.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs())
 				.contains("ABOUT US"), "Text \"ABOUT US\" not found!");
 		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
 	}

@@ -1,16 +1,16 @@
 package com.endava.util;
 
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.TestException;
 
 import com.endava.pages.HomePage;
@@ -67,5 +67,22 @@ public class Utils {
 	}
 
 	/**
-	 * Returns text contained in the web element.
-
+	 * Transfers control to other window
+	 * 
+	 * @author Goran.Kukolj
+	 * 
+	 * @param driver
+	 * 
+	 */
+	public static void switchControlToNewWindow(WebDriver driver) {
+		String mainWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String window : windows) {
+			if (!window.equals(mainWindow)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+		log.debug("Transfers control to other window");
+	}
+}

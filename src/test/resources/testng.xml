@@ -30,18 +30,17 @@
 			<class name="com.endava.TestInvestorsPage" />
 		</classes>
 	</test> <!-- Test -->
+	<test thread-count="5" name="TestContactPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endava.TestContactPage" />
+		</classes>
+	</test>
+	<test thread-count="5" name="TestAboutPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endava.TestAboutPage" />
 
-<test thread-count="5" name="TestContactPage">
-        <parameter name="browser" value="chrome" />
-        <classes>
-            <class name="com.endava.TestContactPage" />
-</classes>
-    </test>
-  	<test thread-count="5" name="TestAboutPage">
-        <parameter name="browser" value="chrome" />
-        <classes>
-            <class name="com.endava.TestAboutPage" />
-
-        </classes>
-    </test> <!-- Test -->
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->

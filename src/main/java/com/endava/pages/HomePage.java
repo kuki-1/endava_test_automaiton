@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
 	private static final String ENDAVA_URL = "https://www.endava.com/";
 	private static final String ENDAVA_TITLE = "Endava";
 	private static final String SHARE_MENU_TEXT = "Share";
-	private static final int SHARE_MENU_NUMBER_OF_OPTIONS = 4;
+	private static final int SHARE_MENU_EXPECTED_NUMBER_OF_OPTIONS = 4;
 	private By contactButtons = By.id("contact-buttons");
 	private By burgerMenu = By.id("menu-toggle");
 	private By solutionMenus = By.className("proposition-section");
@@ -25,13 +25,14 @@ public class HomePage extends BasePage {
 	private By shareIcon = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/a");
 	private By shareMenu = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/div/p");
 	private By shareMenuOptions = By.xpath("//*[@id=\"contact-buttons\"]/ul/li[2]/div/ul/li[*]/a");
-  private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
-  private By phoneIcon = By.className("fe_phone");
+	private String[] shareMenuElementsAttributes = { "share_link fe_linkedin", "share_link fe_facebook",
+			"share_link fe_twitter", "fe_mailFilled" };
+	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+	private By phoneIcon = By.className("fe_phone");
 	private By contact = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[10]/a");
 	private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
-  	
-  	private static Logger log = Logger.getLogger(HomePage.class);
 
+	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -102,7 +103,15 @@ public class HomePage extends BasePage {
 	 */
 	public boolean areShareOptionsPresent() {
 		List<WebElement> shareMenuElements = driver.findElements(this.shareMenuOptions);
-		return shareMenuElements.size() == SHARE_MENU_NUMBER_OF_OPTIONS;
+		int fourResults = 0;
+		for (int count = 0; count < shareMenuElementsAttributes.length; count++) {
+			String shareOptionsClassAttributes = shareMenuElements.get(count).getAttribute("class");
+			if (shareOptionsClassAttributes.equals(shareMenuElementsAttributes[count])) {
+				fourResults++;
+			} else
+				continue;
+		}
+		return fourResults == SHARE_MENU_EXPECTED_NUMBER_OF_OPTIONS;
 	}
 
 	/**
@@ -137,37 +146,40 @@ public class HomePage extends BasePage {
 		return SHARE_MENU_TEXT;
 	}
 
-	public static int getShareMenuNumberOfOptions() {
-		return SHARE_MENU_NUMBER_OF_OPTIONS;
-
 	/**
-	 * Opens ContactPage and instantiate ContactPage object
-	 * if "Contacts" item is present on "burger" menu
+	 * Opens ContactPage and instantiate ContactPage object if "Contacts" item is
+	 * present on "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return ContactPage
 	 */
-	public ContactPage openContactsPage(){
-		if(selectElement(driver.findElement(this.contact))){
+	public ContactPage openContactsPage() {
+		if (selectElement(driver.findElement(this.contact))) {
 			log.debug("ContactPage opened and instantiated");
 			return new ContactPage(driver);
-		}else {
+		} else {
 			log.debug("Contacts item on \"burger\" menu is not present");
-/**
-	 * Opens AboutPage and instantiate AboutPage object
-	 * if About item is present on "burger" menu
+			return null;
+		}
+	}
+
+	/**
+	 * Opens AboutPage and instantiate AboutPage object if About item is present on
+	 * "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return AboutPage
 	 */
-	public AboutPage openAboutPage(){
-		if(selectElement(driver.findElement(this.about))){
+	public AboutPage openAboutPage() {
+		if (selectElement(driver.findElement(this.about))) {
 			log.debug("AboutPage opened and instantiated");
 			return new AboutPage(driver);
-		}else {
+		} else {
 			log.debug("About item on \"burger\" menu is not present");
 			return null;
 		}
 	}
-	
+
 	/**
 	 * @author jelena.corak
 	 * @return By search context of the phone icon
@@ -175,20 +187,21 @@ public class HomePage extends BasePage {
 	public By getPhoneIcon() {
 		return phoneIcon;
 	}
-  
-  /**
-     * Opens InvestorsPage and instantiate InvestorsPage object
-     * if "Investors" item is present on "burger" menu
-     * @author Vladimir Krekic
-     * @return InvestorsPage
-     */
-    public InvestorsPage openInvestorsPage(){
-        if(selectElement(driver.findElement(this.investors))){
-            log.debug("InvestorsPage opened and instantiated");
-            return new InvestorsPage(driver);
-        }else {
-            log.debug("Investors item on \"burger\" menu is not present");
-            return null;
-        }
-    }    
+
+	/**
+	 * Opens InvestorsPage and instantiate InvestorsPage object if "Investors" item
+	 * is present on "burger" menu
+	 * 
+	 * @author Vladimir Krekic
+	 * @return InvestorsPage
+	 */
+	public InvestorsPage openInvestorsPage() {
+		if (selectElement(driver.findElement(this.investors))) {
+			log.debug("InvestorsPage opened and instantiated");
+			return new InvestorsPage(driver);
+		} else {
+			log.debug("Investors item on \"burger\" menu is not present");
+			return null;
+		}
+	}
 }
