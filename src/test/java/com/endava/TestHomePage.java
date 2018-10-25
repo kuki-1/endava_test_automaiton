@@ -76,6 +76,23 @@ public class TestHomePage {
         Assert.assertTrue(homePage.driver.findElement(homePage.getCopyRightsMessage()).getText().contains(" All rights reserved"), "EN Copy Rights message does not mach");
     }
 
+    /**
+     * Test validates that click on the phone icon is a link to the Contact page.
+     *
+     * @author jelena.corak
+     */
+    @Test(priority = 3)
+    public void testPhoneIconLink() {
+        homePage.open();
+        Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
+        homePage.assertPageTitle(homePage.getEndavaTitle());
+        homePage.assertPageUrl(homePage.getEndavaURL());
+        homePage.directClickOnElement(homePage.getPhoneIcon());
+        homePage.assertPageUrl(ContactPage.getContactUrl());
+        homePage.assertPageTitle(ContactPage.getContactTitle());
+        log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
+    }
+
     @AfterClass
     public void tearDown() {
         homePage.quit();

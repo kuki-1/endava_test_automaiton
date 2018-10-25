@@ -1,17 +1,22 @@
 package com.endava.util;
 
+import java.util.Set;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.TestException;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
 
@@ -63,15 +68,5 @@ public class Utils {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
         return options;
-    }
-
-    /**
-     * @param webElement
-     * @author Vladimir Krekic
-     * Makes web element visible
-     */
-    public static void makeItVisible(WebElement webElement) {
-        Coordinates coordinates = ((Locatable) webElement).getCoordinates();
-        coordinates.inViewPort();
     }
 }

@@ -56,9 +56,9 @@ public class TestMenuPage {
         log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
     }
 
-    @AfterTest
-    public void tearDown() {
-        menuPage.quit();
-        log.info("tearDown()");
-    }
+	@AfterClass
+	public void tearDown() {
+		menuPage.quit();
+		log.info("tearDown()");
+	}
 }

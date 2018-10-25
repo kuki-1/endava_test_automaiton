@@ -22,6 +22,12 @@ public class HomePage extends BasePage {
     private By englishLanguage = By.xpath("/html/body/header/div/div[1]/div[2]/div/nav/div/ul/li[2]/a");
     private By deutschLanguage = By.xpath("/html/body/header/div/div[1]/div[2]/div/nav/div/ul/li[1]/a");
     private By copyRightsMessage = By.xpath("/html/body/footer/section[2]/div/div/div[3]");
+    private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
+    private By contact = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[10]/a");
+    private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+    private By phoneIcon = By.className("fe_phone");
+    private static Logger log = Logger.getLogger(HomePage.class);
+
 
     private static Logger log = Logger.getLogger(HomePage.class);
 
@@ -29,21 +35,16 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+
     public void open() {
         driver.get(ENDAVA_URL);
         driver.manage().window().maximize();
         log.debug("Opens " + getEndavaURL());
     }
 
-    public MenuPage openMenu() {
-        driver.findElement(this.burgerMenu).click();
-        log.debug("Finds burger menu and clicks on it");
-        return new MenuPage(driver);
-    }
-
     /**
-     * Opens AgilePage and instantiate AgilePage object
-     * if Agile item is present on "burger" menu
+     * Opens AgilePage and instantiate AgilePage object if Agile item is present on
+     * "burger" menu
      *
      * @return AgilePage
      * @author Vladimir Krekic
@@ -56,6 +57,12 @@ public class HomePage extends BasePage {
             log.debug("Agile item on \"burger\" menu is not present");
             return null;
         }
+    }
+
+    public MenuPage openMenu() {
+        driver.findElement(this.burgerMenu).click();
+        log.debug("Finds burger menu and clicks on it");
+        return new MenuPage(driver);
     }
 
     /**
@@ -147,5 +154,63 @@ public class HomePage extends BasePage {
      */
     public By getCopyRightsMessage() {
         return copyRightsMessage;
+    }
+
+    /**
+     * Opens ContactPage and instantiate ContactPage object
+     * if "Contacts" item is present on "burger" menu
+     *
+     * @return ContactPage
+     * @author Vladimir Krekic
+     */
+    public ContactPage openContactsPage() {
+        if (selectElement(driver.findElement(this.contact))) {
+            log.debug("ContactPage opened and instantiated");
+            return new ContactPage(driver);
+        } else {
+            log.debug("Contacts item on \"burger\" menu is not present");
+        }
+    }
+
+    /**
+     * Opens AboutPage and instantiate AboutPage object
+     * if About item is present on "burger" menu
+     *
+     * @return AboutPage
+     * @author Vladimir Krekic
+     */
+    public AboutPage openAboutPage() {
+        if (selectElement(driver.findElement(this.about))) {
+            log.debug("AboutPage opened and instantiated");
+            return new AboutPage(driver);
+        } else {
+            log.debug("About item on \"burger\" menu is not present");
+            return null;
+        }
+    }
+
+    /**
+     * @return By search context of the phone icon
+     * @author jelena.corak
+     */
+    public By getPhoneIcon() {
+        return phoneIcon;
+    }
+
+    /**
+     * Opens InvestorsPage and instantiate InvestorsPage object
+     * if "Investors" item is present on "burger" menu
+     *
+     * @return InvestorsPage
+     * @author Vladimir Krekic
+     */
+    public InvestorsPage openInvestorsPage() {
+        if (selectElement(driver.findElement(this.investors))) {
+            log.debug("InvestorsPage opened and instantiated");
+            return new InvestorsPage(driver);
+        } else {
+            log.debug("Investors item on \"burger\" menu is not present");
+            return null;
+        }
     }
 }
