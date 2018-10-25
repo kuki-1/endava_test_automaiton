@@ -22,6 +22,11 @@ public class HomePage extends BasePage {
     private By englishLanguage = By.xpath("/html/body/header/div/div[1]/div[2]/div/nav/div/ul/li[2]/a");
     private By deutschLanguage = By.xpath("/html/body/header/div/div[1]/div[2]/div/nav/div/ul/li[1]/a");
     private By copyRightsMessage = By.xpath("/html/body/footer/section[2]/div/div/div[3]");
+	  private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
+  	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+  	private By phoneIcon = By.className("fe_phone");
+  	private static Logger log = Logger.getLogger(HomePage.class);
+
 
     private static Logger log = Logger.getLogger(HomePage.class);
 
@@ -148,4 +153,44 @@ public class HomePage extends BasePage {
     public By getCopyRightsMessage() {
         return copyRightsMessage;
     }
+	
+	/**
+	 * Opens AboutPage and instantiate AboutPage object
+	 * if About item is present on "burger" menu
+	 * @author Vladimir Krekic
+	 * @return AboutPage
+	 */
+	public AboutPage openAboutPage(){
+		if(selectElement(driver.findElement(this.about))){
+			log.debug("AboutPage opened and instantiated");
+			return new AboutPage(driver);
+		}else {
+			log.debug("About item on \"burger\" menu is not present");
+			return null;
+		}
+	}
+	
+	/**
+	 * @author jelena.corak
+	 * @return By search context of the phone icon
+	 */
+	public By getPhoneIcon() {
+		return phoneIcon;
+	}
+  
+  /**
+     * Opens InvestorsPage and instantiate InvestorsPage object
+     * if "Investors" item is present on "burger" menu
+     * @author Vladimir Krekic
+     * @return InvestorsPage
+     */
+    public InvestorsPage openInvestorsPage(){
+        if(selectElement(driver.findElement(this.investors))){
+            log.debug("InvestorsPage opened and instantiated");
+            return new InvestorsPage(driver);
+        }else {
+            log.debug("Investors item on \"burger\" menu is not present");
+            return null;
+        }
+    }    
 }

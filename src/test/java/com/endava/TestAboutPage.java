@@ -1,6 +1,6 @@
 package com.endava;
 
-import com.endava.pages.AgilePage;
+import com.endava.pages.AboutPage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -15,12 +15,12 @@ import org.testng.annotations.Test;
  * @author Vladimir Krekic
  */
 
-class TestAgilePage {
+class TestAboutPage {
 
+    private AboutPage aboutPage;
     private HomePage homePage;
     private MenuPage menuPage;
-    private AgilePage agilePage;
-    private static Logger log = Logger.getLogger(TestAgilePage.class);
+    private static Logger log = Logger.getLogger(AboutPage.class);
 
     @BeforeTest
     @Parameters({"browser"})
@@ -31,22 +31,26 @@ class TestAgilePage {
 
     /**
      * @author Vladimir Krekic
-     * Test validates AGILE menu item is active in DIGITAL - AGILE - AUTOMATION menu
+     * Opens to endava site and validate new url,
+     * finds "WE DELIVER GLOBAL TRANSFORMATION" section and
+     * validates all of 23 endava locations (both names of the cities and addresses)
+     * (e.g. Belgrade 9đ, Milutina Milankovica St.)
      */
     @Test
-    public void testAgileItemActiveInDAAMenu() {
+    public void testAllLocations() {
         homePage.open();
         menuPage = homePage.openMenu();
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-        agilePage = homePage.openAgilePage();
-        Assert.assertEquals(agilePage.driver.getCurrentUrl(), agilePage.getAgileUrl(), "Incorrect AgilePage Url");
-        agilePage.assertPageTitle(agilePage.getAgileTitle());
-        Assert.assertEquals(agilePage.driver.findElement(agilePage.getAgileOnRibbonMenu()).getAttribute("class"), "active");
-        log.debug("testAgileItemActiveInDAAMenu() - Test passed - AGILE menu item is active in DIGITAL - AGILE - AUTOMATION menu");
+        aboutPage = homePage.openAboutPage();
+        Assert.assertEquals(aboutPage.driver.getCurrentUrl(), aboutPage.getAboutUrl(), "Incorrect AboutPage Url");
+        aboutPage.assertPageTitle(aboutPage.getAboutTitle());
+        Assert.assertTrue(aboutPage.checkAddresses(aboutPage.getAllLocations()), "Locations do not mach");
+        log.info("testAllLocations() - Test passed");
     }
 
     @AfterTest
     public void tearDown() {
         homePage.quit();
+        log.info("tearDown()");
     }
 }
