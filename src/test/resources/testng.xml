@@ -30,4 +30,10 @@
 			<class name="com.endava.TestInvestorsPage" />
 		</classes>
 	</test> <!-- Test -->
+  	<test thread-count="5" name="TestAboutPage">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.endava.TestAboutPage" />
+        </classes>
+    </test> <!-- Test -->
 </suite> <!-- Suite -->
