@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -42,12 +43,12 @@ public class AboutPage extends BasePage {
     }
 
     /**
-     * @author Vladimir Krekic
      * @return Set of cities and addresses grabbed from web site
+     * @author Vladimir Krekic
      */
-    public Set<String> setAllLocations(){
+    public Set<String> setAllLocations() {
         Set<String> setOfAllLocations = new LinkedHashSet<>();
-        for(int counter = 0; counter < 6; counter ++) {
+        for (int counter = 0; counter < 6; counter++) {
             addLocations(setOfAllLocations, listOfCities);
             addLocations(setOfAllLocations, listOfAddresses);
             selectElement(rightArrow);
@@ -57,29 +58,29 @@ public class AboutPage extends BasePage {
     }
 
     /**
-     * @author Vladimir Krekic
-     * @param set Set of cities and addresses in which elements will be added
+     * @param set  Set of cities and addresses in which elements will be added
      * @param list partial List of cities or addresses to be added into a Set
      * @return partial Set of cities and addresses grabbed from web site
+     * @author Vladimir Krekic
      */
-    private Set<String> addLocations(Set<String> set, List<WebElement> list){
+    private Set<String> addLocations(Set<String> set, List<WebElement> list) {
         set.addAll(list.stream()
                 .map(w -> w.getText())
-                .filter(w-> !w.equalsIgnoreCase(""))
+                .filter(w -> !w.equalsIgnoreCase(""))
                 .collect(Collectors.toSet()));
         return set;
     }
 
     /**
-     * @author Vladimir Krekic
      * @param addresses Set of addresses grabbed from web page
      * @return boolean - true if all elements are matching list of addresses
-     *                   and prints list of elements not matching if false
+     * and prints list of elements not matching if false
+     * @author Vladimir Krekic
      */
-    public boolean checkAddresses (Set<String> addresses){
-        if(addresses.size() == ADDRESSES_OF_ENDAVA_LOCATIONS.size()){
+    public boolean checkAddresses(Set<String> addresses) {
+        if (addresses.size() == ADDRESSES_OF_ENDAVA_LOCATIONS.size()) {
             return addresses.stream()
-                    .filter(address-> !ADDRESSES_OF_ENDAVA_LOCATIONS.contains(address))
+                    .filter(address -> !ADDRESSES_OF_ENDAVA_LOCATIONS.contains(address))
                     .peek(log::debug) //prints list of elements not matching
                     .count() == 0;
         }

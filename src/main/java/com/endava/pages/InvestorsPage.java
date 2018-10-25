@@ -26,16 +26,16 @@ public class InvestorsPage extends BasePage {
     }
 
     /**
+     * @param searchText String to be searched for
      * @author Vladimir Krekic
      * Finds searchBox and fills it with search text
-     * @param searchText String to be searched for
      */
-    public void fillSearchBox(String searchText){
+    public void fillSearchBox(String searchText) {
         makeItVisible(searchBox);
-        if(searchBox.isDisplayed()){
+        if (searchBox.isDisplayed()) {
             searchBox.sendKeys(searchText);
             log.debug("Search Box filled with text: " + searchText);
-        }else {
+        } else {
             log.debug("Search box not present - test failed");
             driver.quit();
         }
@@ -64,14 +64,14 @@ public class InvestorsPage extends BasePage {
     public String getSearchResult() {
         return SEARCH_RESULT;
     }
-  
-  /**
-	 * Returns search context of About Us element on the INVESTORS page.
-	 * 
-	 * @author jelena.corak	 
-	 * @return By search context of About Us element
-	 */
-	public By getInvestorsAboutUs() {
-		return investorsAboutUs;
-	}
+
+    /**
+     * Returns search context of About Us element on the INVESTORS page.
+     *
+     * @return By search context of About Us element
+     * @author jelena.corak
+     */
+    public By getInvestorsAboutUs() {
+        return investorsAboutUs;
+    }
 }

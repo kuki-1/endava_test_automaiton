@@ -7,28 +7,27 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.AutomationPage;
+import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
 
 /**
- * 
  * @author Goran.Kukolj
- *
  */
 public class TestAutomationPage {
 
-	private HomePage homePage;
-	private MenuPage menuPage;
-	private AutomationPage automationPage;
-	private static Logger log = Logger.getLogger(TestAutomationPage.class);
+    private HomePage homePage;
+    private MenuPage menuPage;
+    private AutomationPage automationPage;
+    private static Logger log = Logger.getLogger(TestAutomationPage.class);
 
-	@BeforeMethod
-	@Parameters({ "browser" })
-	public void setUp(String browser) {
-		homePage = Utils.setUpWebBrowser(browser);
-		log.info("Sets up web browser");
-	}
+    @BeforeMethod
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        homePage = Utils.setUpWebBrowser(browser);
+        log.info("Sets up web browser");
+    }
 
 	/**
 	 * Test validates that automation link on automation page is active, and checks
@@ -49,8 +48,8 @@ public class TestAutomationPage {
 		automationPage.assertPageUrl(automationPage.getEndavaAutomationUrl());
 	}
 
-	@AfterMethod
-	public void tearDown() {
-		homePage.quit();
-	}
+    @AfterMethod
+    public void tearDown() {
+        homePage.quit();
+    }
 }
