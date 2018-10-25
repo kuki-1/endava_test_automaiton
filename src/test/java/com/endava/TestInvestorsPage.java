@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.endava.pages.BasePage;
 import com.endava.pages.HomePage;
 import com.endava.pages.InvestorsPage;
 import com.endava.pages.MenuPage;
@@ -48,12 +47,9 @@ public class TestInvestorsPage {
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		investorsPage = menuPage.openInvestorsPage();
+		investorsPage = homePage.openInvestorsPage();
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getSearchButton());
-		Assert.assertTrue(BasePage.isTitleCorrect(investorsPage.driver, investorsPage.getEndavaInvestorsTitle()),
-				"Title is not the same.");
-		Assert.assertTrue(BasePage.isURLTheSame(investorsPage.driver, investorsPage.getEndavaInvestorsUrl()),
-				"URL is not the same.");
+		investorsPage.assertPageUrl(InvestorsPage.getInvestorsUrl());
 		investorsPage.clickOnSearchButton();
 		investorsPage.clickOnSearchFieldAndEntertext(investorsPage.getTextEntry());
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getNumberOfResults());
@@ -64,51 +60,58 @@ public class TestInvestorsPage {
 	/**
 	 * @author jelena.corak
 	 *
-	 *         Test validates that the string "ABOUT US" is visible on the "INVESTORS" page in the menu.
+	 *         Test validates that the string "ABOUT US" is visible on the
+	 *         "INVESTORS" page in the menu.
 	 */
 	@Test
 	public void testAboutUsVisibility() {
-		homePage.open();		
-		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), homePage.getEndavaURL().toLowerCase(), "Incorrect URL!");		
-		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), homePage.getEndavaTitle().toLowerCase(), "Incorrect title!");
+		homePage.open();
+		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), homePage.getEndavaURL().toLowerCase(),
+				"Incorrect URL!");
+		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), homePage.getEndavaTitle().toLowerCase(),
+				"Incorrect title!");
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		investorsPage = menuPage.clickOnInvestors();		
-		Assert.assertEquals(investorsPage.driver.getCurrentUrl().toLowerCase(), InvestorsPage.getInvestorsUrl().toLowerCase(), "Incorrect URL!");
+		investorsPage = menuPage.clickOnInvestors();
+		Assert.assertEquals(investorsPage.driver.getCurrentUrl().toLowerCase(),
+				InvestorsPage.getInvestorsUrl().toLowerCase(), "Incorrect URL!");
 		/*
-		 * Incorrect title of Investors page. Title verification skipped, since it fails.
-		 */		
-		//Assert.assertEquals(investorsPage.driver.getTitle().toLowerCase(), InvestorsPage.getInvestorsTitle().toLowerCase(), "Incorrect title!");
+		 * Incorrect title of Investors page. Title verification skipped, since it
+		 * fails.
+		 */
+		// Assert.assertEquals(investorsPage.driver.getTitle().toLowerCase(),
+		// InvestorsPage.getInvestorsTitle().toLowerCase(), "Incorrect title!");
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getInvestorsAboutUs());
-		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs()).contains("ABOUT US"), "Text \"ABOUT US\" not found!");
+		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs())
+				.contains("ABOUT US"), "Text \"ABOUT US\" not found!");
 		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
 	}
-  
-  /**
-     * @author Vladimir Krekic
-     * From burger menu chooses Investors, validates url has been changed,
-     * clicks on the Search, on a search box types "blahblah",
-     * clicks on a "magnifying glass" and validates search result is "No results found."
-     */
-    @Test
-    public void testInvestorsSearch() {
-        homePage.open();
-        menuPage = homePage.openMenu();
-        Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-        investorsPage = homePage.openInvestorsPage();
-        Assert.assertEquals(InvestorsPage.getInvestorsUrl(),
-                investorsPage.driver.getCurrentUrl(), "InvestorsPage Url does not match");        
-        investorsPage.assertPageTitle(InvestorsPage.getInvestorsTitle());
-        investorsPage.selectElement(investorsPage.getSearch());
-        investorsPage.fillSearchBox("blahblah");
-        investorsPage.selectElement(investorsPage.getSubmitButton());
-        Assert.assertEquals(investorsPage.getSearchResult
-                        (investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
-                investorsPage.getSearchResult(),"Wrong search result");
-        log.info("testInvestorsSearch() - test passed");
-    }
-@AfterMethod
+
+	/**
+	 * @author Vladimir Krekic From burger menu chooses Investors, validates url has
+	 *         been changed, clicks on the Search, on a search box types "blahblah",
+	 *         clicks on a "magnifying glass" and validates search result is "No
+	 *         results found."
+	 */
+	@Test
+	public void testInvestorsSearch() {
+		homePage.open();
+		menuPage = homePage.openMenu();
+		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
+		investorsPage = homePage.openInvestorsPage();
+		Assert.assertEquals(InvestorsPage.getInvestorsUrl(), investorsPage.driver.getCurrentUrl(),
+				"InvestorsPage Url does not match");
+		investorsPage.selectElement(investorsPage.getSearch());
+		investorsPage.fillSearchBox("blahblah");
+		investorsPage.selectElement(investorsPage.getSubmitButton());
+		Assert.assertEquals(
+				investorsPage.getSearchResult(investorsPage.driver.findElement(investorsPage.getSearchResultElement())),
+				investorsPage.getSearchResult(), "Wrong search result");
+		log.info("testInvestorsSearch() - test passed");
+	}
+
+	@AfterMethod
 	public void tearDown() {
 		homePage.quit();
 	}

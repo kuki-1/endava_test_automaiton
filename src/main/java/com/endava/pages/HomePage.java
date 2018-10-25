@@ -4,8 +4,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.endava.util.Utils;
-
 /**
  * @author jana.djordjevic@endava.com
  *
@@ -20,9 +18,9 @@ public class HomePage extends BasePage {
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
 	private By about = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[8]/a");
-  	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
-  	private By phoneIcon = By.className("fe_phone");
-  	private static Logger log = Logger.getLogger(HomePage.class);
+	private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+	private By phoneIcon = By.className("fe_phone");
+	private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -48,7 +46,7 @@ public class HomePage extends BasePage {
 	 * @return AgilePage
 	 */
 	public AgilePage openAgilePage() {
-		if(selectElement(driver.findElement(this.agileItem))){
+		if (selectElement(driver.findElement(this.agileItem))) {
 			log.debug("AgilePage opened and instantiated");
 			return new AgilePage(driver);
 		} else {
@@ -101,21 +99,22 @@ public class HomePage extends BasePage {
 	}
 
 	/**
-	 * Opens AboutPage and instantiate AboutPage object
-	 * if About item is present on "burger" menu
+	 * Opens AboutPage and instantiate AboutPage object if About item is present on
+	 * "burger" menu
+	 * 
 	 * @author Vladimir Krekic
 	 * @return AboutPage
 	 */
-	public AboutPage openAboutPage(){
-		if(selectElement(driver.findElement(this.about))){
+	public AboutPage openAboutPage() {
+		if (selectElement(driver.findElement(this.about))) {
 			log.debug("AboutPage opened and instantiated");
 			return new AboutPage(driver);
-		}else {
+		} else {
 			log.debug("About item on \"burger\" menu is not present");
 			return null;
 		}
 	}
-	
+
 	/**
 	 * @author jelena.corak
 	 * @return By search context of the phone icon
@@ -123,20 +122,21 @@ public class HomePage extends BasePage {
 	public By getPhoneIcon() {
 		return phoneIcon;
 	}
-  
-  /**
-     * Opens InvestorsPage and instantiate InvestorsPage object
-     * if "Investors" item is present on "burger" menu
-     * @author Vladimir Krekic
-     * @return InvestorsPage
-     */
-    public InvestorsPage openInvestorsPage(){
-        if(selectElement(driver.findElement(this.investors))){
-            log.debug("InvestorsPage opened and instantiated");
-            return new InvestorsPage(driver);
-        }else {
-            log.debug("Investors item on \"burger\" menu is not present");
-            return null;
-        }
-    }    
+
+	/**
+	 * Opens InvestorsPage and instantiate InvestorsPage object if "Investors" item
+	 * is present on "burger" menu
+	 * 
+	 * @author Vladimir Krekic
+	 * @return InvestorsPage
+	 */
+	public InvestorsPage openInvestorsPage() {
+		if (selectElement(driver.findElement(this.investors))) {
+			log.debug("InvestorsPage opened and instantiated");
+			return new InvestorsPage(driver);
+		} else {
+			log.debug("Investors item on \"burger\" menu is not present");
+			return null;
+		}
+	}
 }

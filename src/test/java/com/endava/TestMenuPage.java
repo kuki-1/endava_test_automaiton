@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
 import com.endava.util.Utils;
@@ -20,8 +21,7 @@ public class TestMenuPage {
 
 	/**
 	 * @author jelena.corak
-	 * @param browser
-	 *            web browser defined in testng.xml
+	 * @param browser web browser defined in testng.xml
 	 */
 	@BeforeMethod
 	@Parameters({ "browser" })
