@@ -8,14 +8,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import com.endava.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.internal.Coordinates;
-import org.apache.log4j.Logger;
 
 /**
  * @author Vladimir Krekic
@@ -55,7 +53,6 @@ public class Utils {
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-<<<<<<< HEAD
     /**
      * Returns option that disables infobars in chrome browser
      *
@@ -77,35 +74,4 @@ public class Utils {
         Coordinates coordinates = ((Locatable) webElement).getCoordinates();
         coordinates.inViewPort();
     }
-=======
-	/**
-	 * @author Vladimir Krekic
-	 * Makes web element visible
-	 * @param webElement
-	 */
-	public static void makeItVisible(WebElement webElement){
-		Coordinates coordinates = ((Locatable) webElement).getCoordinates();
-		coordinates.inViewPort();
-	}
-
-  /**
-	 * Returns text contained in the web element.
- 	 * 
- 	 * @author jelena.corak
- 	 * @param WebDriver
- 	 *            driver
- 	 * @param By
- 	 *            Search context of a web element
- 	 * 
- 	 * @return String text of the web element
- 	 */
- 	public static String getTextFromElement(WebDriver driver, By context) {
- 		WebElement webElement = driver.findElement(context);
- 		if (!webElement.isDisplayed()) {
- 			Assert.fail("No element found.");
- 		}
- 		log.debug("Text contained in the following element(" + context + "): " + webElement.getText());
- 		return webElement.getText();
-  }
->>>>>>> 772b66bd05b6f2c690c8a8b843c35cbd8de03393
 }

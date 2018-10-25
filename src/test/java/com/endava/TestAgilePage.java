@@ -40,7 +40,7 @@ class TestAgilePage {
         Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
         agilePage = homePage.openAgilePage();
         Assert.assertEquals(agilePage.driver.getCurrentUrl(), agilePage.getAgileUrl(), "Incorrect AgilePage Url");
-        agilePage.assertPageTitle(agilePage.getAgileTitle());
+        Assert.assertTrue(AgilePage.isTitleCorrect(agilePage.driver, agilePage.getAgileTitle()), "Incorrect AgilePage Title ");
         Assert.assertEquals(agilePage.driver.findElement(agilePage.getAgileOnRibbonMenu()).getAttribute("class"), "active");
         log.debug("testAgileItemActiveInDAAMenu() - Test passed - AGILE menu item is active in DIGITAL - AGILE - AUTOMATION menu");
     }

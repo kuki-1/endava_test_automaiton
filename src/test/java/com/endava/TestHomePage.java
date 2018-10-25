@@ -1,5 +1,6 @@
 package com.endava;
 
+import com.endava.pages.BasePage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -8,7 +9,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.endava.pages.HomePage;
 import com.endava.pages.MenuPage;
-import com.endava.pages.ContactPage;
 import com.endava.util.Utils;
 
 /**
@@ -16,7 +16,6 @@ import com.endava.util.Utils;
  */
 public class TestHomePage {
 
-<<<<<<< HEAD
     private HomePage homePage;
     private MenuPage menuPage;
     private static Logger log = Logger.getLogger(TestHomePage.class);
@@ -82,61 +81,4 @@ public class TestHomePage {
         homePage.quit();
         log.info("tearDown()");
     }
-=======
-	private HomePage homePage;
-	private MenuPage menuPage;
-	private static Logger log = Logger.getLogger(TestHomePage.class);
-
-	@BeforeTest
-	@Parameters({ "browser" })
-	public void setUp(String browser) {
-		homePage = Utils.setUpWebBrowser(browser);
-		log.info("setUp()");
-	}
-
-	@Test(priority = 1)
-	public void testHomePageIsOpened() {
-		homePage.open();
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		homePage.assertPageUrl(homePage.getEndavaURL());
-		homePage.assertPageTitle(homePage.getEndavaTitle());
-		log.info("testHomePageIsOpened()");
-	}
-
-	@Test(priority = 2)
-	public void testOpenMenu() {
-		homePage.open();
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		homePage.clickOnDownArrow();
-		Assert.assertTrue(homePage.isSolutionMenusVisible(), "Solution menus are not visible.");
-		menuPage = homePage.openMenu();
-		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
-		menuPage.assertPageUrl(homePage.getEndavaURL());
-		log.info("testOpenMenu()");
-	}
-
-	/**
-	 * Test validates that click on the phone icon is a link to the Contact page.
-	 * 
-	 * @author jelena.corak
-	 * 
-	 */
-	@Test(priority = 3)
-	public void testPhoneIconLink() {
-		homePage.open();
-		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
-		homePage.assertPageTitle(homePage.getEndavaTitle());
-		homePage.assertPageUrl(homePage.getEndavaURL());
-		homePage.directClickOnElement(homePage.getPhoneIcon());		
-		homePage.assertPageUrl(ContactPage.getContactUrl());		
-		homePage.assertPageTitle(ContactPage.getContactTitle());
-		log.info("testPhoneIconLink(): VALIDATION SUCCESSFUL! Phone icon link is a link to Contacts page.");
-	}
-
-	@AfterClass
-	public void tearDown() {
-		homePage.quit();
-		log.info("tearDown()");
-	}
->>>>>>> 772b66bd05b6f2c690c8a8b843c35cbd8de03393
 }
