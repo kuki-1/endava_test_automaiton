@@ -1,6 +1,5 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
