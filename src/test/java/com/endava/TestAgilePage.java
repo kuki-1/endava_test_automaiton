@@ -1,17 +1,16 @@
 package com.endava;
 
+import com.endava.pages.AgilePage;
+import com.endava.pages.HomePage;
+import com.endava.pages.MenuPage;
+import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.endava.pages.AgilePage;
 import com.endava.pages.BasePage;
-import com.endava.pages.HomePage;
-import com.endava.pages.MenuPage;
-import com.endava.util.Utils;
 
 /**
  * @author Vladimir Krekic
