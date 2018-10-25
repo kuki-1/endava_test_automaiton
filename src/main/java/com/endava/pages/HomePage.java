@@ -1,6 +1,5 @@
 package com.endava.pages;
 
-import com.endava.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +18,8 @@ public class HomePage extends BasePage {
 	private By centerScroll = By.className("fe_downarrow");
 	private By agileItem = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[2]/a");
 	private By contact = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[10]/a");
+  private By investors = By.xpath("//*[@id=\"mCSB_1_container\"]/div[1]/nav/ul/li[5]/a");
+  private By phoneIcon = By.className("fe_phone");
   private static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -111,4 +112,28 @@ public class HomePage extends BasePage {
 			return null;
 		}
 	}
+	
+	/**
+	 * @author jelena.corak
+	 * @return By search context of the phone icon
+	 */
+	public By getPhoneIcon() {
+		return phoneIcon;
+	}
+  
+  /**
+     * Opens InvestorsPage and instantiate InvestorsPage object
+     * if "Investors" item is present on "burger" menu
+     * @author Vladimir Krekic
+     * @return InvestorsPage
+     */
+    public InvestorsPage openInvestorsPage(){
+        if(selectElement(driver.findElement(this.investors))){
+            log.debug("InvestorsPage opened and instantiated");
+            return new InvestorsPage(driver);
+        }else {
+            log.debug("Investors item on \"burger\" menu is not present");
+            return null;
+        }
+    }    
 }
