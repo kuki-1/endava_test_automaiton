@@ -6,7 +6,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.endava.pages.HomePage;
 import com.endava.pages.InvestorsPage;
 import com.endava.pages.MenuPage;
@@ -31,41 +30,29 @@ public class TestInvestorsPage {
 	}
 
 	/**
-	 * @author jelena.corak
-	 *
-	 *         Test validates that the string "ABOUT US" is visible on the
-	 *         "INVESTORS" page in the menu.
+	 * @author jelena.corak Test validates that the string "ABOUT US" is visible on the "INVESTORS" page in the menu.
 	 */
 	@Test
 	public void testAboutUsVisibility() {
 		homePage.open();
-		Assert.assertEquals(homePage.driver.getCurrentUrl().toLowerCase(), homePage.getEndavaURL().toLowerCase(),
-				"Incorrect URL!");
-		Assert.assertEquals(homePage.driver.getTitle().toLowerCase(), homePage.getEndavaTitle().toLowerCase(),
-				"Incorrect title!");
+		homePage.assertPageUrl(homePage.getEndavaURL());
+		homePage.assertPageTitle(homePage.getEndavaTitle());
 		Utils.webDriverWait(homePage.driver, homePage.getContactButtons());
 		menuPage = homePage.openMenu();
 		Utils.webDriverWait(menuPage.driver, menuPage.getNavigationList());
 		investorsPage = menuPage.clickOnInvestors();
-		Assert.assertEquals(investorsPage.driver.getCurrentUrl().toLowerCase(),
-				InvestorsPage.getInvestorsUrl().toLowerCase(), "Incorrect URL!");
-		/*
-		 * Incorrect title of Investors page. Title verification skipped, since it
-		 * fails.
-		 */
-		// Assert.assertEquals(investorsPage.driver.getTitle().toLowerCase(),
-		// InvestorsPage.getInvestorsTitle().toLowerCase(), "Incorrect title!");
+		investorsPage.assertPageUrl(InvestorsPage.getInvestorsUrl());
 		Utils.webDriverWait(investorsPage.driver, investorsPage.getInvestorsAboutUs());
-		Assert.assertTrue(Utils.getTextFromElement(investorsPage.driver, investorsPage.getInvestorsAboutUs())
-				.contains("ABOUT US"), "Text \"ABOUT US\" not found!");
+		Assert.assertTrue(investorsPage.getTextFromElement(investorsPage.getInvestorsAboutUs()).contains("ABOUT US"),
+				"Text \"ABOUT US\" not found!");
 		log.info("testAboutUsVisibility() : VALIDATION SUCCESSFUL!");
 	}
 
 	/**
-	 * @author Vladimir Krekic From burger menu chooses Investors, validates url has
-	 *         been changed, clicks on the Search, on a search box types "blahblah",
-	 *         clicks on a "magnifying glass" and validates search result is "No
-	 *         results found."
+	 * @author Vladimir Krekic
+	 * 
+	 *         From burger menu chooses Investors, validates url has been changed, clicks on the Search, on a search box
+	 *         types "blahblah", clicks on a "magnifying glass" and validates search result is "No results found."
 	 */
 	@Test
 	public void testInvestorsSearch() {
